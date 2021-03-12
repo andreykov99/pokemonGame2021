@@ -8,7 +8,7 @@ import secondImage from '../src/assets/bg2.jpg';
 function App() {
   return (
     <>
-      <Header title='' desc='' />
+      <Header title='This is title' desc='This is Description!' />
       <Layout
         title='This is title'
         desc='This is Description!'

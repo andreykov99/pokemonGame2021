@@ -3,9 +3,11 @@ import styles from './Layout.module.css';
 
 
 const Layout = (props) => {
-    const bg = { background: (props.urlBg) ? `url(${props.urlBg}) 0 0/cover` : props.colorBg }
+    const style = {};
+    if (props.urlBg) { style.backgroundImage = `url(${props.urlBg}` };
+    if (props.colorBg) { style.backgroundColor = props.colorBg };
     return (
-        <section className={styles.root} style={bg}>
+        <section className={styles.root} style={style}>
             <div className={styles.wrapper}>
                 <article >
                     <div className={styles.title}>
