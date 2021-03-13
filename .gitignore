@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+generate-react-cli.json
 
 # testing
 /coverage

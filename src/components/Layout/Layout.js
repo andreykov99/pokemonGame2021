@@ -18,6 +18,7 @@ const Layout = (props) => {
                         <p>{props.desc}</p>
                     </div>
                 </article>
+                {props.children}
             </div>
         </section >
     )
