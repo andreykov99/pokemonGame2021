@@ -2,23 +2,22 @@ import React from 'react';
 import styles from './Layout.module.css';
 
 
-const Layout = (props) => {
+const Layout = ({ id, title, urlBg, colorBg, children }) => {
     const style = {};
-    if (props.urlBg) { style.backgroundImage = `url(${props.urlBg}` };
-    if (props.colorBg) { style.backgroundColor = props.colorBg };
+    if (urlBg) { style.backgroundImage = `url(${urlBg}` };
+    if (colorBg) { style.backgroundColor = colorBg };
     return (
-        <section className={styles.root} style={style}>
+        <section className={styles.root} style={style} id={id}>
             <div className={styles.wrapper}>
                 <article >
                     <div className={styles.title}>
-                        <h3>{props.title}</h3>
+                        <h3>{title}</h3>
                         <span className={styles.separator}></span>
                     </div>
                     <div className={`${styles.desc} ${styles.full}`}>
-                        <p>{props.desc}</p>
+                        {children}
                     </div>
                 </article>
-                {props.children}
             </div>
         </section >
     )
