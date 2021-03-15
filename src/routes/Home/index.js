@@ -141,10 +141,16 @@ const POKEMONS = [
     }
 ];
 
-const HomePage = () => {
+const HomePage = ({ onChangePage }) => {
+    const handleClickButton = (page) => {
+        onChangePage && onChangePage(page);
+    }
     return (
         <>
-            <Header title='Pokemon Game' desc='This is simple triple triad card game' />
+            <Header
+                title='Pokemon Game'
+                desc='This is simple triple triad card game'
+                onClickButton={handleClickButton} />
             <Layout
                 id='gamerules'
                 title='Game Rules'

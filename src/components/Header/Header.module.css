@@ -88,3 +88,8 @@
     color: #fafafa;
     line-height: 32px;
 }
+
+.btn {
+    display: block;
+    margin: 0 auto;
+}
