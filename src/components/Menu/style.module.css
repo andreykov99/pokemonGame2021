@@ -145,6 +145,7 @@
 }
 
 .menuContainer ul li a {
+    text-decoration: none;
     font-size: 3rem;
     padding-left: 0.5rem;
 }

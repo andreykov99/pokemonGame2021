@@ -5,6 +5,7 @@ import firstImage from './assets/bg1.jpg';
 import secondImage from './assets/bg2.jpg';
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import styles from './style.module.css';
+import MenuHeader from '../../components/MenuHeader';
 
 const POKEMONS = [
     {
@@ -147,6 +148,7 @@ const HomePage = ({ onChangePage }) => {
     }
     return (
         <>
+            <MenuHeader />
             <Header
                 title='Pokemon Game'
                 desc='This is simple triple triad card game'
