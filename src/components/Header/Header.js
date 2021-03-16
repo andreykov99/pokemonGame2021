@@ -1,5 +1,5 @@
 import React from 'react';
-import cn from 'classnames';
+// import cn from 'classnames';
 import styles from './Header.module.css';
 
 import '../../App.css';
@@ -14,7 +14,7 @@ const Header = ({ title, desc, onClickButton }) => {
             <div className={styles.container}>
                 <h1>{title}</h1>
                 <p>{desc}</p>
-                <button className={cn('btn', styles.btn)} onClick={handleClickButton}>Start Game</button>
+                <button className={styles.btn} onClick={handleClickButton}>Start Game</button>
             </div>
         </header>
     )
