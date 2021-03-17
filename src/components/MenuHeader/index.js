@@ -6,15 +6,15 @@ import Navbar from '../Navbar';
 import '../../App.css';
 import Menu from '../Menu';
 
-const MenuHeader = () => {
-    const [isActive, setActive] = useState(false);
+const MenuHeader = ({ bgActive }) => {
+    const [isActive, setActive] = useState(null);
     const handleMenuButtonChange = () => {
-        setActive(!isActive);
+        setActive(prevState => !prevState);
     }
 
     return (
         <>
-            <Navbar onMenuButtonChange={handleMenuButtonChange} isActive={isActive} />
+            <Navbar onMenuButtonChange={handleMenuButtonChange} isActive={isActive} bgActive={bgActive} />
             <Menu isActive={isActive} />
         </>
     )

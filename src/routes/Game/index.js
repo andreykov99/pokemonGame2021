@@ -12,7 +12,7 @@ const GamePage = ({ onChangePage }) => {
 
     return (
         <>
-            <MenuHeader />
+            <MenuHeader bgActive={true} />
             <div className={cn(styles.root, styles.flex)}>
                 <h2>This is Game Page!</h2>
                 <button onClick={handleClickButton}>Home</button>
