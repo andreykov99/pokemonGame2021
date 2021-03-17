@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import styles from './PokemonCard.module.css';
 import cardBackImg from './assets/card-back-side.jpg';
 
@@ -9,15 +10,15 @@ const PokemonCard = ({ name, type, values, img, id }) => {
   }
   return (
     <div className={styles.root} onClick={handleClick}>
-      <div className={`${styles.pokemonCard} ${isActive ? styles.active : ''}`}>
+      <div className={cn(styles.pokemonCard, { [styles.active]: isActive })}>
         <div className={styles.cardFront}>
-          <div className={`${styles.wrap} ${styles.front}`}>
-            <div className={`${styles.pokemon} ${styles[type]}`}>
+          <div className={cn(styles.wrap, styles.front)}>
+            <div className={cn(styles.pokemon, styles[type])}>
               <div className={styles.values}>
-                <div className={`${styles.count} ${styles.top}`}>{values.top}</div>
-                <div className={`${styles.count} ${styles.right}`}>{values.right}</div>
-                <div className={`${styles.count} ${styles.bottom}`}>{values.bottom}</div>
-                <div className={`${styles.count} ${styles.left}`}>{values.left}</div>
+                <div className={cn(styles.count, styles.top)}>{values.top}</div>
+                <div className={cn(styles.count, styles.right)}>{values.right}</div>
+                <div className={cn(styles.count, styles.bottom)}>{values.bottom}</div>
+                <div className={cn(styles.count, styles.left)}>{values.left}</div>
               </div >
               <div className={styles.imgContainer}>
                 <img src={img} alt={name} />
@@ -32,7 +33,7 @@ const PokemonCard = ({ name, type, values, img, id }) => {
         </div >
 
         <div className={styles.cardBack}>
-          < div className={`${styles.wrap} ${styles.back}`}>
+          <div className={`${styles.wrap} ${styles.back}`}>
             <img src={cardBackImg} alt="Сard Backed" />
           </div >
         </div >
