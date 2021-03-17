@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './style.module.css'
 
 const MENU = [
     {
         title: 'HOME',
-        to: 'welcome'
+        to: '/'
     },
     {
         title: 'GAME',
@@ -20,7 +21,10 @@ const MENU = [
     },
 ];
 
-const Menu = ({ isActive }) => {
+const Menu = ({ isActive, closeMenu }) => {
+    const handleMenuItemClick = () => {
+        closeMenu && closeMenu();
+    }
     return (
         <div className={cn(styles.menuContainer,
             { [styles.active]: isActive === true },
@@ -30,9 +34,9 @@ const Menu = ({ isActive }) => {
                 <ul>
                     {MENU.map(({ title, to }, index) => (
                         <li key={index}>
-                            <a href={`#${to}`}>
+                            <Link to={to} onClick={handleMenuItemClick}>
                                 {title}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>

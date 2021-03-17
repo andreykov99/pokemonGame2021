@@ -1,11 +1,9 @@
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import Layout from '../../components/Layout/Layout';
-import Footer from '../../components/Footer/Footer';
 import firstImage from './assets/bg1.jpg';
 import secondImage from './assets/bg2.jpg';
-import PokemonCard from '../../components/PokemonCard/PokemonCard';
+import PokemonCard from '../../components/PokemonCard';
 import styles from './style.module.css';
-import MenuHeader from '../../components/MenuHeader';
 
 const POKEMONS = [
     {
@@ -142,17 +140,12 @@ const POKEMONS = [
     }
 ];
 
-const HomePage = ({ onChangePage }) => {
-    const handleClickButton = (page) => {
-        onChangePage && onChangePage(page);
-    }
+const HomePage = () => {
     return (
         <>
-            <MenuHeader />
             <Header
                 title='Pokemon Game'
-                desc='This is simple triple triad card game'
-                onClickButton={handleClickButton} />
+                desc='This is simple triple triad card game' />
             <Layout
                 id='gamerules'
                 title='Game Rules'
@@ -184,7 +177,6 @@ const HomePage = ({ onChangePage }) => {
                 id='about'
                 title='About'
                 urlBg={firstImage} />
-            <Footer />
         </>
     );
 }

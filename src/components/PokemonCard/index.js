@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import styles from './PokemonCard.module.css';
+import styles from './style.module.css';
 import cardBackImg from './assets/card-back-side.jpg';
 
 const PokemonCard = ({ name, type, values, img, id }) => {

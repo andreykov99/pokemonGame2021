@@ -1,0 +1,13 @@
+.root {
+    min-height: 100vh;
+    background: #202736;
+}
+.root h2 {
+    color: #fff;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

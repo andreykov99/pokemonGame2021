@@ -1,10 +1,7 @@
 import { useState } from 'react';
-// import cn from 'classnames';
-// import styles from './style.module.css'
 import Navbar from '../Navbar';
-
-import '../../App.css';
 import Menu from '../Menu';
+
 
 const MenuHeader = ({ bgActive }) => {
     const [isActive, setActive] = useState(null);
@@ -15,7 +12,7 @@ const MenuHeader = ({ bgActive }) => {
     return (
         <>
             <Navbar onMenuButtonChange={handleMenuButtonChange} isActive={isActive} bgActive={bgActive} />
-            <Menu isActive={isActive} />
+            <Menu isActive={isActive} closeMenu={handleMenuButtonChange} />
         </>
     )
 }

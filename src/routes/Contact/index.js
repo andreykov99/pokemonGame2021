@@ -1,14 +1,14 @@
 import cn from 'classnames';
 import styles from './style.module.css'
 
-const GamePage = () => {
+const ContactPage = () => {
 
     return (
         <>
             <div className={cn(styles.root, styles.flex)}>
-                <h2>This is Game Page!</h2>
+                <h2>This is Contact Page!</h2>
             </div>
         </>
     )
 }
-export default GamePage;
+export default ContactPage;

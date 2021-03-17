@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import styles from './style.module.css'
 
-const Navbar = ({ onMenuButtonChange, bgActive = false, isActive }) => {
+const Navbar = ({ onMenuButtonChange, bgActive, isActive }) => {
     const handleMenuButtonClick = () => {
         onMenuButtonChange && onMenuButtonChange();
     }

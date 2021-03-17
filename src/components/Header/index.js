@@ -1,12 +1,13 @@
-import React from 'react';
+import { useHistory } from 'react-router-dom';
 // import cn from 'classnames';
-import styles from './Header.module.css';
+import styles from './style.module.css';
 
 import '../../App.css';
 
-const Header = ({ title, desc, onClickButton }) => {
+const Header = ({ title, desc }) => {
+    const history = useHistory();
     const handleClickButton = () => {
-        onClickButton && onClickButton('game');
+        history.push('/game');
     }
     return (
         <header className={styles.root}>
