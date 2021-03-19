@@ -1,21 +1,31 @@
-import React from 'react';
+import { useState } from 'react';
+import PokemonCard from '../../components/PokemonCard';
+
 import cn from 'classnames';
 import styles from './style.module.css'
-import MenuHeader from '../../components/MenuHeader';
 
-import '../../App.css';
+const GamePage = ({ POKEMONS }) => {
+    const [myPokemons, changePokemons] = useState(POKEMONS);
+    const handleCardClick = (id) => {
+        changePokemons(pre => (pre.map(item => ({ ...item, ...(item.id === Number(id) && { active: true }) }))));
 
-const GamePage = ({ onChangePage }) => {
-    const handleClickButton = () => {
-        onChangePage && onChangePage('main');
     }
-
     return (
         <>
-            <MenuHeader />
             <div className={cn(styles.root, styles.flex)}>
                 <h2>This is Game Page!</h2>
-                <button onClick={handleClickButton}>Home</button>
+            </div>
+            <div className={styles.flex}>
+                {myPokemons.map((item) => <PokemonCard
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    type={item.type}
+                    values={item.values}
+                    img={item.img}
+                    isActive={item.active}
+                    handleCardClick={handleCardClick}
+                />)}
             </div>
         </>
     )

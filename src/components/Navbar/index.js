@@ -1,14 +1,12 @@
 import cn from 'classnames';
 import styles from './style.module.css'
 
-import '../../App.css';
-
-const Navbar = ({ onMenuButtonChange, isActive }) => {
+const Navbar = ({ onMenuButtonChange, bgActive, isActive }) => {
     const handleMenuButtonClick = () => {
         onMenuButtonChange && onMenuButtonChange();
     }
     return (
-        <nav className={styles.root}>
+        <nav className={cn(styles.root, { [styles.bgActive]: bgActive })}>
             <div className={styles.navWrapper}>
                 <p className={styles.brand}>
                     LOGO
