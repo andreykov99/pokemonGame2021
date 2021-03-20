@@ -11,16 +11,14 @@ const GamePage = () => {
 
     const [pokemons, setPokemons] = useState({});
     const handleCardClick = (id) => {
-        // changePokemons(pre => (pre.map(item => ({ ...item, ...(item.id === Number(id) && { active: true }) }))));
         setPokemons(prevState => {
             return Object.entries(prevState).reduce((acc, item) => {
                 const pokemon = { ...item[1] };
                 if (pokemon.id === id) {
-                    pokemon.active = true;
+                    pokemon.active = !pokemon.active;
+                    database.ref('pokemons/' + item[0] + '/active').set(pokemon.active);
                 };
-
                 acc[item[0]] = pokemon;
-
                 return acc;
             }, {});
         });
