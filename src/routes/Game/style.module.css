@@ -1,5 +1,6 @@
 .root {
     background: #202736;
+    flex-direction: column;
 }
 .root h2 {
     color: #fff;
