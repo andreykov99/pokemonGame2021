@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PokemonCard from '../../components/PokemonCard';
 
-import database from '../../services/firebase';
+import FirebaseContext from '../../context/FirebaseContext';
 
 import cn from 'classnames';
 import styles from './style.module.css'
 
 
 const GamePage = () => {
+    const firebase = useContext(FirebaseContext);
     const [pokemons, setPokemons] = useState({});
+    console.log('#### firebase', firebase);
 
     const handleAddPokemon = () => {
         const getRandomInt = (max) => {
             return Math.floor(Math.random() * Math.floor(max));
         }
         const pokemonsArray = Object.entries(pokemons);
-        const newKey = database.ref().child('pokemons').push().key;
-        database.ref('pokemons/' + newKey).set(pokemonsArray[getRandomInt(pokemonsArray.length)][1])
+        firebase.addPokemon(pokemonsArray[getRandomInt(5)][1]);
     };
 
     const handleCardClick = (id) => {
@@ -25,18 +26,20 @@ const GamePage = () => {
                 const pokemon = { ...item[1] };
                 if (pokemon.id === id) {
                     pokemon.active = !pokemon.active;
-                    database.ref('pokemons/' + item[0] + '/active').set(pokemon.active);
                 };
                 acc[item[0]] = pokemon;
+
+                firebase.postPokemon([item[0]], pokemon);
+
                 return acc;
             }, {});
         });
     }
 
     useEffect(() => {
-        database.ref('pokemons').on('value', (snapshot) => {
-            setPokemons(snapshot.val());
-        })
+        firebase.getPokemonSocket((pokemons) => {
+            setPokemons(pokemons);
+        });
     }, [])
 
     return (
