@@ -35,7 +35,7 @@ const StartPage = () => {
             setPokemons(pokemons);
         })
         return () => firebaseContext.offPokemonSocket();
-    }, []);
+    }, [firebaseContext]);
 
     return (
         <>
