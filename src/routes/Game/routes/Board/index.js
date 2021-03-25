@@ -55,7 +55,8 @@ const BoardPage = () => {
             });
 
             const request = await res.json();
-            setBoard(request.data);
+            let result = setBoard(request.data);
+            return result
         }
 
         if (choiseCard) {
@@ -74,12 +75,13 @@ const BoardPage = () => {
                     prevState.filter(item => item.id !== choiseCard.id));
             }
 
-            fetchBoard(params);
-
-            setSteps(prevState => {
-                const count = prevState + 1;
-                return count
-            })
+            fetchBoard(params)
+                .then(() => {
+                    setSteps(prevState => {
+                        const count = prevState + 1;
+                        return count
+                    })
+                })
         }
     }
 
@@ -92,7 +94,7 @@ const BoardPage = () => {
                 alert('LOSE')
             } else alert('DRAW')
         }
-    }, [steps])
+    }, [steps, board, player1, player2]);
 
     useEffect(() => {
 
