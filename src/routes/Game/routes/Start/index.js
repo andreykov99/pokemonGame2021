@@ -41,10 +41,7 @@ const StartPage = () => {
         <>
             <div className={s.root}>
                 <h2>This is Game Page!</h2>
-                <div><button
-                    onClick={handleStartGame}
-                    disabled={Object.keys(pokemonsContext.pokemons).length < 5}
-                >Start Game</button></div>
+                <div><button onClick={pokemonsContext.clearSelectedPokemons}>CLEAR</button></div>
                 <div className={s.flex}>
                     {Object.entries(pokemons).map(([key, { id, name, type, values, img, selected }]) => <PokemonCard
                         className={s.card}
@@ -63,6 +60,10 @@ const StartPage = () => {
                         }}
                     />)}
                 </div>
+                <div><button
+                    onClick={handleStartGame}
+                    disabled={Object.keys(pokemonsContext.pokemons).length < 5}
+                >Start Game</button></div>
             </div>
         </>
     )
