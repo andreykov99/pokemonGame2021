@@ -8,7 +8,7 @@ import MenuHeader from './components/MenuHeader';
 import Footer from './components/Footer';
 import NotFound from './routes/NotFound';
 
-import Firebase from './services/firebase';
+import FireBase from './services/firebase';
 import FirebaseContext from './context/FirebaseContext';
 
 import cn from 'classnames';
@@ -21,7 +21,7 @@ const App = () => {
   const isPadding = location.pathname === '/' || location.pathname === '/game/board';
 
   return (
-    <FirebaseContext.Provider value={new Firebase()}>
+    <FirebaseContext.Provider value={FireBase}>
       <Switch>
         <Route path="/404" component={NotFound} />
         <Route>
