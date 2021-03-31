@@ -1,15 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCT8hjyah_BH_lW1IN2-laxjFDkhER1kjw",
-    authDomain: "pokemon-game-939fe.firebaseapp.com",
-    databaseURL: "https://pokemon-game-939fe-default-rtdb.firebaseio.com",
-    projectId: "pokemon-game-939fe",
-    storageBucket: "pokemon-game-939fe.appspot.com",
-    messagingSenderId: "719445172974",
-    appId: "1:719445172974:web:e286a395ac1395d55a49ff"
-};
+import firebaseConfig from './firebaseConfig';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -58,4 +50,6 @@ export const userSignUp = async ({ email, password }) => {
     return response;
 }
 
-export default Firebase;
+const FireBase = new Firebase();
+
+export default FireBase;

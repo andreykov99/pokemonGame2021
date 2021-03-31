@@ -1,18 +1,24 @@
 import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getPokemonsAsync, selectPokemonsData } from '../../../../store/pokemons';
+
 import PokemonCard from '../../../../components/PokemonCard';
 
-import FirebaseContext from '../../../../context/FirebaseContext';
 import PokemonsContext from '../../../../context/PokemonsContext';
+
 
 import s from './style.module.css'
 
 
 const StartPage = () => {
-    const firebaseContext = useContext(FirebaseContext);
+    // const firebaseContext = useContext(FirebaseContext);
     const pokemonsContext = useContext(PokemonsContext);
     const [pokemons, setPokemons] = useState({});
     const history = useHistory();
+    const pokemonsRedux = useSelector(selectPokemonsData);
+    const dispatch = useDispatch();
 
     const handleStartGame = () => {
         history.push('/game/board');
@@ -31,16 +37,17 @@ const StartPage = () => {
     }
 
     useEffect(() => {
-        firebaseContext.getPokemonSocket((pokemons) => {
-            setPokemons(pokemons);
-        })
-        return () => firebaseContext.offPokemonSocket();
-    }, [firebaseContext]);
+        dispatch(getPokemonsAsync());
+    }, []);
+
+    useEffect(() => {
+        setPokemons(pokemonsRedux);
+    }, [pokemonsRedux]);
 
     return (
         <>
             <div className={s.root}>
-                <h2>This is Game Page!</h2>
+                <h2>Select 5 cards and click Start</h2>
                 <div><button onClick={pokemonsContext.clearSelectedPokemons}>CLEAR</button></div>
                 <div className={s.flex}>
                     {Object.entries(pokemons).map(([key, { id, name, type, values, img, selected }]) => <PokemonCard
