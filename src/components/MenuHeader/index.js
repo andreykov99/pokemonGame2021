@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
 import Menu from '../Menu';
 import Modal from '../Modal';
@@ -14,6 +14,10 @@ const MenuHeader = ({ bgActive }) => {
     const handleClickLogin = () => {
         setModalOpen(prevState => !prevState);
     }
+
+    useEffect(() => {
+        document.querySelector('body').style.overflow = isModalOpen ? 'hidden' : null;
+    }, [isModalOpen])
 
     return (
         <>
