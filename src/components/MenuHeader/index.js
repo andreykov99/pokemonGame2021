@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
 import Menu from '../Menu';
 import Modal from '../Modal';
+import LoginForm from '../LoginForm';
 
 
 const MenuHeader = ({ bgActive }) => {
@@ -14,6 +15,12 @@ const MenuHeader = ({ bgActive }) => {
     const handleClickLogin = () => {
         setModalOpen(prevState => !prevState);
     }
+
+    const handleLoginFormSubmit = ({ email, password }) => {
+        console.log('#####: email ', email, '#####: password ', password);
+        handleClickLogin();
+    }
+
 
     useEffect(() => {
         document.querySelector('body').style.overflow = isModalOpen ? 'hidden' : null;
@@ -33,10 +40,13 @@ const MenuHeader = ({ bgActive }) => {
             />
             <Modal
                 isOpen={isModalOpen}
-                title="This is title"
+                title="Please login to start game"
                 onCloseModal={handleClickLogin}
             >
-                Some text here...
+                <LoginForm
+                    onSubmit={handleLoginFormSubmit}
+                    onClose={isModalOpen}
+                />
             </Modal>
         </>
     )
