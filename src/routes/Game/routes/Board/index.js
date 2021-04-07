@@ -94,28 +94,27 @@ const BoardPage = () => {
         }
     }, [steps, board, player1, player2, history]);
 
-    useEffect(() => {
+    const fetchData = async () => {
 
-        const fetchData = async () => {
-
-            const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
-            const boardRequest = await boardResponse.json();
-            setBoard(boardRequest.data);
+        const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
+        const boardRequest = await boardResponse.json();
+        setBoard(boardRequest.data);
 
 
-            const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
-            const player2Request = await player2Response.json();
-            setPokemons2(player2Request.data);
-            setPlayer2(() => {
-                return player2Request.data.map(item => ({
-                    ...item,
-                    possession: 'red',
-                })
-                )
+        const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
+        const player2Request = await player2Response.json();
+        setPokemons2(player2Request.data);
+        setPlayer2(() => {
+            return player2Request.data.map(item => ({
+                ...item,
+                possession: 'red',
             })
-        }
-        fetchData();
+            )
+        })
+    }
 
+    useEffect(() => {
+        fetchData();
     }, [])
 
 

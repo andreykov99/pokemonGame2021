@@ -5,6 +5,7 @@ import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 
 import { userSignUp } from '../../services/firebase';
+import { NotificationManager } from 'react-notifications';
 
 
 const MenuHeader = ({ bgActive }) => {
@@ -19,8 +20,13 @@ const MenuHeader = ({ bgActive }) => {
     }
 
     const handleLoginFormSubmit = ({ email, password }) => {
-        console.log('#####: email ', email, '#####: password ', password);
-        userSignUp(email, password);
+
+        const result = userSignUp(email, password);
+        if (result.hasOwnProperty('error')) {
+            NotificationManager.error(result.error.message, 'Wrong')
+        } else {
+            NotificationManager.success('Success')
+        };
         handleClickLogin();
     }
 

@@ -8,6 +8,9 @@ import MenuHeader from './components/MenuHeader';
 import Footer from './components/Footer';
 import NotFound from './routes/NotFound';
 
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 import Firebase from './services/firebase';
 import FirebaseContext from './context/FirebaseContext';
 
@@ -45,6 +48,7 @@ const App = () => {
           </>
         </Route>
       </Switch >
+      <NotificationContainer />
     </FirebaseContext.Provider>
   )
 }

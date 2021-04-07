@@ -1,5 +1,5 @@
 import { ReactComponent as LoginSvg } from './assets/login.svg';
-import { ReactComponent as LogoutSvg } from './assets/logout.svg';
+// import { ReactComponent as LogoutSvg } from './assets/logout.svg';
 
 import cn from 'classnames';
 import s from './style.module.css'
