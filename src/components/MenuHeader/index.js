@@ -25,7 +25,8 @@ const MenuHeader = ({ bgActive }) => {
         if (result.hasOwnProperty('error')) {
             NotificationManager.error(result.error.message, 'Wrong')
         } else {
-            NotificationManager.success('Success')
+            NotificationManager.success('Success');
+            localStorage.setItem('idToken', result.idToken);
         };
         handleClickLogin();
     }

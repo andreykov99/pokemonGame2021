@@ -1,5 +1,5 @@
 import { ReactComponent as LoginSvg } from './assets/login.svg';
-// import { ReactComponent as LogoutSvg } from './assets/logout.svg';
+import { ReactComponent as LogoutSvg } from './assets/logout.svg';
 
 import cn from 'classnames';
 import s from './style.module.css'
@@ -22,8 +22,11 @@ const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive }) => {
                 </p>
                 <div className={s.menuWrap}>
                     <div className={s.loginBtn} onClick={handleLoginClick}>
-                        <LoginSvg />
-                        {/* <LogoutSvg /> */}
+                        {
+                            localStorage.getItem('idToken') ?
+                                <LogoutSvg /> :
+                                <LoginSvg />
+                        }
                     </div>
                     <div
                         className={cn(s.menuButton, { [s.active]: isActive })}
