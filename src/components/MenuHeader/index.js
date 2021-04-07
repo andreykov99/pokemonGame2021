@@ -4,6 +4,8 @@ import Menu from '../Menu';
 import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 
+import { userSignUp } from '../../services/firebase';
+
 
 const MenuHeader = ({ bgActive }) => {
     const [isActive, setActive] = useState(null);
@@ -18,6 +20,7 @@ const MenuHeader = ({ bgActive }) => {
 
     const handleLoginFormSubmit = ({ email, password }) => {
         console.log('#####: email ', email, '#####: password ', password);
+        userSignUp(email, password);
         handleClickLogin();
     }
 
