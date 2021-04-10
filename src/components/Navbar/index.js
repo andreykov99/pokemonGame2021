@@ -1,20 +1,38 @@
-import cn from 'classnames';
-import styles from './style.module.css'
+import { ReactComponent as LoginSvg } from './assets/login.svg';
+import { ReactComponent as LogoutSvg } from './assets/logout.svg';
 
-const Navbar = ({ onMenuButtonChange, bgActive, isActive }) => {
+import cn from 'classnames';
+import s from './style.module.css'
+
+const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive }) => {
+
     const handleMenuButtonClick = () => {
         onMenuButtonChange && onMenuButtonChange();
     }
+
+    const handleLoginClick = () => {
+        onClickLogin && onClickLogin();
+    }
+
     return (
-        <nav className={cn(styles.root, { [styles.bgActive]: bgActive })}>
-            <div className={styles.navWrapper}>
-                <p className={styles.brand}>
+        <nav className={cn(s.root, { [s.bgActive]: bgActive })}>
+            <div className={s.navWrapper}>
+                <p className={s.brand}>
                     LOGO
                 </p>
-                <div
-                    className={cn(styles.menuButton, { [styles.active]: isActive })}
-                    onClick={handleMenuButtonClick}>
-                    <span />
+                <div className={s.menuWrap}>
+                    <div className={s.loginBtn} onClick={handleLoginClick}>
+                        {
+                            localStorage.getItem('idToken') ?
+                                <LogoutSvg /> :
+                                <LoginSvg />
+                        }
+                    </div>
+                    <div
+                        className={cn(s.menuButton, { [s.active]: isActive })}
+                        onClick={handleMenuButtonClick}>
+                        <span />
+                    </div>
                 </div>
             </div>
         </nav >

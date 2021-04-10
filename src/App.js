@@ -8,8 +8,12 @@ import MenuHeader from './components/MenuHeader';
 import Footer from './components/Footer';
 import NotFound from './routes/NotFound';
 
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 import Firebase from './services/firebase';
 import FirebaseContext from './context/FirebaseContext';
+import PrivateRoute from './components/PrivateRoute';
 
 import cn from 'classnames';
 import styles from './style.module.css';
@@ -33,8 +37,8 @@ const App = () => {
                 <Route path="/home" render={() => (
                   <Redirect to="/" />
                 )} />
-                <Route path="/game" render={() => (<GamePage />)} />
-                <Route path="/about" component={AboutPage} />
+                <PrivateRoute path="/game" component={GamePage} />
+                <PrivateRoute path="/about" component={AboutPage} />
                 <Route path="/contact" component={ContactPage} />
                 <Route render={() => (
                   <Redirect to="/404" />
@@ -45,6 +49,7 @@ const App = () => {
           </>
         </Route>
       </Switch >
+      <NotificationContainer />
     </FirebaseContext.Provider>
   )
 }
