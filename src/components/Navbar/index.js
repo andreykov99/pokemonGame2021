@@ -7,11 +7,11 @@ import s from './style.module.css'
 
 const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive }) => {
 
-    const handleMenuButtonClick = () => {
+    const handleClickMenuButton = () => {
         onMenuButtonChange && onMenuButtonChange();
     }
 
-    const handleLoginClick = () => {
+    const handleClickLogin = () => {
         onClickLogin && onClickLogin();
     }
 
@@ -22,7 +22,7 @@ const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive }) => {
                     <img src={logo} alt={"logo"} />
                 </div>
                 <div className={s.menuWrap}>
-                    <div className={s.loginBtn} onClick={handleLoginClick}>
+                    <div className={s.loginBtn} onClick={handleClickLogin}>
                         {
                             localStorage.getItem('idToken') ?
                                 <LogoutSvg /> :
@@ -31,7 +31,7 @@ const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive }) => {
                     </div>
                     <div
                         className={cn(s.menuButton, { [s.active]: isActive })}
-                        onClick={handleMenuButtonClick}>
+                        onClick={handleClickMenuButton}>
                         <span />
                     </div>
                 </div>
