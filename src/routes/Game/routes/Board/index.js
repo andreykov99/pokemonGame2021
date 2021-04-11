@@ -115,6 +115,7 @@ const BoardPage = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, [])
 
 

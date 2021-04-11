@@ -38,6 +38,7 @@ const StartPage = () => {
 
     useEffect(() => {
         dispatch(getPokemonsAsync());
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {

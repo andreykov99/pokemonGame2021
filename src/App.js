@@ -11,7 +11,7 @@ import NotFound from './routes/NotFound';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
-import Firebase from './services/firebase';
+import FireBase from './services/firebase';
 import FirebaseContext from './context/FirebaseContext';
 import PrivateRoute from './components/PrivateRoute';
 
