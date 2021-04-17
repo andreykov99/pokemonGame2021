@@ -1,34 +1,40 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { userSignIn, selectIsLogin, userLogout } from '../../store/user';
+
 import Navbar from '../Navbar';
 import Menu from '../Menu';
 import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 
-import { userSignUp } from '../../services/firebase';
-import { NotificationManager } from 'react-notifications';
-
-
 const MenuHeader = ({ bgActive }) => {
+    const dispatch = useDispatch();
+    const isLogin = useSelector(selectIsLogin);
+
     const [isActive, setActive] = useState(null);
     const [isModalOpen, setModalOpen] = useState(null);
+
+
     const handleMenuButtonChange = () => {
         setActive(prevState => !prevState);
     }
 
     const handleClickLogin = () => {
-        setModalOpen(prevState => !prevState);
+        if (isLogin) {
+            dispatch(userLogout());
+        } else {
+            setModalOpen(true);
+        }
+    }
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     }
 
     const handleLoginFormSubmit = ({ email, password }) => {
-
-        const result = userSignUp(email, password);
-        if (result.hasOwnProperty('error')) {
-            NotificationManager.error(result.error.message, 'Wrong')
-        } else {
-            NotificationManager.success('Success');
-            localStorage.setItem('idToken', result.idToken);
-        };
-        handleClickLogin();
+        dispatch(userSignIn({ email, password }));
+        handleCloseModal();
     }
 
 
@@ -43,6 +49,7 @@ const MenuHeader = ({ bgActive }) => {
                 onClickLogin={handleClickLogin}
                 isActive={isActive}
                 bgActive={bgActive}
+                isLogin={isLogin}
             />
             <Menu
                 isActive={isActive}
@@ -51,7 +58,7 @@ const MenuHeader = ({ bgActive }) => {
             <Modal
                 isOpen={isModalOpen}
                 title="Please login to start game"
-                onCloseModal={handleClickLogin}
+                onCloseModal={handleCloseModal}
             >
                 <LoginForm
                     onSubmit={handleLoginFormSubmit}

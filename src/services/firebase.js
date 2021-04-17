@@ -35,21 +35,6 @@ class Firebase {
     }
 }
 
-export const userSignUp = async ({ email, password }) => {
-    const params = {
-        method: 'POST',
-        body: JSON.stringify({
-            email,
-            password,
-            returnSecureToken: true
-        })
-    };
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCT8hjyah_BH_lW1IN2-laxjFDkhER1kjw', params)
-        .then(resp => resp.json());
-
-    return response;
-}
-
 const FireBase = new Firebase();
 
 export default FireBase;

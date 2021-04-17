@@ -9,4 +9,5 @@ const config = {
     appId: "1:719445172974:web:e286a395ac1395d55a49ff"
 };
 
+export const apiKey = config.apiKey;
 export default config;
