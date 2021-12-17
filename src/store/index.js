@@ -4,9 +4,9 @@ import GameReducer from './game';
 import UserReducer from './user';
 
 export default configureStore({
-    reducer: {
-        pokemons: PokemonsReducer,
-        user: UserReducer,
-        game: GameReducer,
-    }
-})
+  reducer: {
+    pokemons: PokemonsReducer,
+    user: UserReducer,
+    game: GameReducer
+  }
+});

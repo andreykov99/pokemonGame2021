@@ -5,18 +5,29 @@ import Input from '../Input';
 
 import s from './style.module.css';
 
-const LoginForm = ({ onSubmit, onClose, onChangeForm }) => {
+const SignUpForm = ({ onSubmit, onClose, onChangeForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const isInvalid = password === '' || email === '';
+  const [pwconfirm, setPwconfirm] = useState('');
+  const [errors, setErrors] = useState({});
 
   const clearForm = () => {
     setEmail('');
     setPassword('');
+    setPwconfirm('');
+    setErrors({});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (pwconfirm !== password) {
+      // show error
+      setErrors((prev) => ({
+        ...prev,
+        pwconfirm: 'passwords may be some'
+      }));
+      return;
+    }
     onSubmit({
       email,
       password
@@ -37,29 +48,35 @@ const LoginForm = ({ onSubmit, onClose, onChangeForm }) => {
         label="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        error={errors.password}
+      />
+      <Input
+        type="password"
+        name="pwconfirm"
+        label="Confirm password"
+        value={pwconfirm}
+        onChange={(e) => setPwconfirm(e.target.value)}
+        error={errors.pwconfirm}
       />
       <div className={s.flex}>
-        <button type="submit" disabled={isInvalid}>
-          Login
-        </button>
+        <button type="button">Sign Up</button>
         <div
-          className={s.link}
-          onClick={onChangeForm}
           role="button"
           tabIndex={0}
+          className={s.link}
+          onClick={onChangeForm}
           onKeyPress={onChangeForm}
         >
-          Register
+          Login
         </div>
       </div>
     </form>
   );
 };
 
-LoginForm.propTypes = {
+SignUpForm.propTypes = {
   onSubmit: PropTypes.func,
   onClose: PropTypes.func,
   onChangeForm: PropTypes.func
 };
-
-export default LoginForm;
+export default SignUpForm;

@@ -8,72 +8,81 @@ import PokemonCard from '../../../../components/PokemonCard';
 
 import PokemonsContext from '../../../../context/PokemonsContext';
 
-
-import s from './style.module.css'
-
+import s from './style.module.css';
 
 const StartPage = () => {
-    // const firebaseContext = useContext(FirebaseContext);
-    const pokemonsContext = useContext(PokemonsContext);
-    const [pokemons, setPokemons] = useState({});
-    const history = useHistory();
-    const pokemonsRedux = useSelector(selectPokemonsData);
-    const dispatch = useDispatch();
+  // const firebaseContext = useContext(FirebaseContext);
+  const pokemonsContext = useContext(PokemonsContext);
+  const [pokemons, setPokemons] = useState({});
+  const history = useHistory();
+  const pokemonsRedux = useSelector(selectPokemonsData);
+  const dispatch = useDispatch();
 
-    const handleStartGame = () => {
-        history.push('/game/board');
-    };
+  const handleStartGame = () => {
+    history.push('/game/board');
+  };
 
-    const handleCardClick = (key) => {
-        const pokemon = { ...pokemons[key] };
-        pokemonsContext.onSelectedPokemons(key, pokemon);
-        setPokemons(prevState => ({
-            ...prevState,
-            [key]: {
-                ...prevState[key],
-                selected: !prevState[key].selected,
-            }
-        }))
-    }
+  const handleCardClick = (key) => {
+    const pokemon = { ...pokemons[key] };
+    pokemonsContext.onSelectedPokemons(key, pokemon);
+    setPokemons((prevState) => ({
+      ...prevState,
+      [key]: {
+        ...prevState[key],
+        selected: !prevState[key].selected
+      }
+    }));
+  };
 
-    useEffect(() => {
-        dispatch(getPokemonsAsync());
-        // eslint-disable-next-line
-    }, []);
+  useEffect(() => {
+    dispatch(getPokemonsAsync());
+    // eslint-disable-next-line
+  }, []);
 
-    useEffect(() => {
-        setPokemons(pokemonsRedux);
-    }, [pokemonsRedux]);
+  useEffect(() => {
+    setPokemons(pokemonsRedux);
+  }, [pokemonsRedux]);
 
-    return (
-        <>
-            <div className={s.root}>
-                <h2>Select 5 cards and click Start</h2>
-                <div><button onClick={pokemonsContext.clearSelectedPokemons}>CLEAR</button></div>
-                <div className={s.flex}>
-                    {Object.entries(pokemons).map(([key, { id, name, type, values, img, selected }]) => <PokemonCard
-                        className={s.card}
-                        key={key}
-                        id={id}
-                        name={name}
-                        type={type}
-                        values={values}
-                        img={img}
-                        isActive={true}
-                        isSelected={selected}
-                        handleCardClick={() => {
-                            if (Object.keys(pokemonsContext.pokemons).length < 5 || selected) {
-                                handleCardClick(key)
-                            }
-                        }}
-                    />)}
-                </div>
-                <div><button
-                    onClick={handleStartGame}
-                    disabled={Object.keys(pokemonsContext.pokemons).length < 5}
-                >Start Game</button></div>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div className={s.root}>
+        <h2>Select 5 cards and click Start</h2>
+        <div>
+          <button type="button" onClick={pokemonsContext.clearSelectedPokemons}>
+            CLEAR
+          </button>
+        </div>
+        <div className={s.flex}>
+          {Object.entries(pokemons).map(([key, { id, name, type, values, img, selected }]) => (
+            <PokemonCard
+              className={s.card}
+              key={key}
+              id={id}
+              name={name}
+              type={type}
+              values={values}
+              img={img}
+              isActive
+              isSelected={selected}
+              handleCardClick={() => {
+                if (Object.keys(pokemonsContext.pokemons).length < 5 || selected) {
+                  handleCardClick(key);
+                }
+              }}
+            />
+          ))}
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={handleStartGame}
+            disabled={Object.keys(pokemonsContext.pokemons).length < 5}
+          >
+            Start Game
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
 export default StartPage;

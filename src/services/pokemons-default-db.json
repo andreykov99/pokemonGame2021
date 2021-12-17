@@ -1,11 +1,7 @@
 {
-  "pokemons" : {
-    "-MSjWsPjJfFkNKk6ixPF" : {
-      "abilities": [
-        "keen-eye",
-        "tangled-feet",
-        "big-pecks"
-      ],
+  "pokemons": {
+    "-MSjWsPjJfFkNKk6ixPF": {
+      "abilities": ["keen-eye", "tangled-feet", "big-pecks"],
       "base_experience": 122,
       "height": 11,
       "weight": 300,
@@ -28,12 +24,8 @@
         "left": 2
       }
     },
-    "-MSjWsPo_nEu6XI67Jjz" : {
-      "abilities": [
-        "intimidate",
-        "shed-skin",
-        "unnerve"
-      ],
+    "-MSjWsPo_nEu6XI67Jjz": {
+      "abilities": ["intimidate", "shed-skin", "unnerve"],
       "base_experience": 157,
       "height": 35,
       "weight": 650,
@@ -56,11 +48,8 @@
         "left": 8
       }
     },
-    "-MSjWsPo_nEu6XI67Jk-" : {
-      "abilities": [
-        "static",
-        "lightning-rod"
-      ],
+    "-MSjWsPo_nEu6XI67Jk-": {
+      "abilities": ["static", "lightning-rod"],
       "base_experience": 112,
       "height": 4,
       "weight": 60,
@@ -83,11 +72,8 @@
         "left": 5
       }
     },
-    "-MSjWsPps4Nua-6dEPjC" : {
-      "abilities": [
-        "overgrow",
-        "chlorophyll"
-      ],
+    "-MSjWsPps4Nua-6dEPjC": {
+      "abilities": ["overgrow", "chlorophyll"],
       "base_experience": 64,
       "height": 7,
       "weight": 69,
@@ -110,11 +96,8 @@
         "left": 4
       }
     },
-    "-MSjWsPq2RMOHZogNmW5" : {
-      "abilities": [
-        "blaze",
-        "solar-power"
-      ],
+    "-MSjWsPq2RMOHZogNmW5": {
+      "abilities": ["blaze", "solar-power"],
       "base_experience": 62,
       "height": 6,
       "weight": 85,
