@@ -10,7 +10,7 @@ import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 import SignUpForm from '../SignUpForm';
 
-const actionTypes = {
+const ACTIONS = {
   SHOW_MENU: 'SHOW_MENU',
   HIDE_MENU: 'HIDE_MENU',
   TOGGLE_MENU: 'TOGGLE_MENU',
@@ -23,43 +23,43 @@ const actionTypes = {
 function headReducer(state, action) {
   const { type } = action;
   switch (type) {
-    case actionTypes.SHOW_MENU: {
+    case ACTIONS.SHOW_MENU: {
       return {
         ...state,
         isActive: true
       };
     }
-    case actionTypes.HIDE_MENU: {
+    case ACTIONS.HIDE_MENU: {
       return {
         ...state,
         isActive: false
       };
     }
-    case actionTypes.TOGGLE_MENU: {
+    case ACTIONS.TOGGLE_MENU: {
       return {
         ...state,
         isActive: !state.isActive
       };
     }
-    case actionTypes.OPEN_MODAL: {
+    case ACTIONS.OPEN_MODAL: {
       return {
         ...state,
         isModalOpen: true
       };
     }
-    case actionTypes.CLOSE_MODAL: {
+    case ACTIONS.CLOSE_MODAL: {
       return {
         ...state,
         isModalOpen: false
       };
     }
-    case actionTypes.SHOW_LOGIN_FORM: {
+    case ACTIONS.SHOW_LOGIN_FORM: {
       return {
         ...state,
         isLoginForm: true
       };
     }
-    case actionTypes.SHOW_REGISTER_FORM: {
+    case ACTIONS.SHOW_REGISTER_FORM: {
       return {
         ...state,
         isLoginForm: false
@@ -85,19 +85,19 @@ const MenuHeader = ({ bgActive }) => {
   const userIsLogin = useSelector(selectIsLogin);
 
   const handleMenuButtonChange = () => {
-    dispatch({ type: actionTypes.TOGGLE_MENU });
+    dispatch({ type: ACTIONS.TOGGLE_MENU });
   };
 
   const handleClickLogin = () => {
     if (userIsLogin) {
       dispatch(userLogout());
     } else {
-      dispatch({ type: actionTypes.OPEN_MODAL });
+      dispatch({ type: ACTIONS.OPEN_MODAL });
     }
   };
 
   const handleCloseModal = () => {
-    dispatch({ type: actionTypes.CLOSE_MODAL });
+    dispatch({ type: ACTIONS.CLOSE_MODAL });
   };
 
   const handleFormSubmit = ({ email, password }) => {
@@ -133,13 +133,13 @@ const MenuHeader = ({ bgActive }) => {
           <LoginForm
             onSubmit={handleFormSubmit}
             onClose={state.isModalOpen}
-            onChangeForm={() => dispatch({ type: actionTypes.SHOW_REGISTER_FORM })}
+            onChangeForm={() => dispatch({ type: ACTIONS.SHOW_REGISTER_FORM })}
           />
         ) : (
           <SignUpForm
             onSubmit={handleFormSubmit}
             onClose={state.isModalOpen}
-            onChangeForm={() => dispatch({ type: actionTypes.SHOW_LOGIN_FORM })}
+            onChangeForm={() => dispatch({ type: ACTIONS.SHOW_LOGIN_FORM })}
           />
         )}
       </Modal>

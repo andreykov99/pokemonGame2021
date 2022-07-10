@@ -19,8 +19,8 @@ const userSlice = createSlice({
       email: action.payload.email,
       idToken: action.payload.idToken,
       localId: action.payload.localId
-    }),
-    logout: (state) => initialState
+    })
+    // logout: (state) => initialState
   }
 });
 
@@ -29,9 +29,9 @@ export const { login, logout } = userSlice.actions;
 export const selectIsLogin = (state) => state.user.isAuth;
 export const getRefreshToken = () => Cookies.get('refresh_token');
 
-const setError = (errorMsg) => {
-  console.error('#####:  ', errorMsg);
-};
+// const setError = (errorMsg) => {
+//   console.error('#####:  ', errorMsg);
+// };
 
 export const userLogout = () => (dispatch) => {
   Cookies.remove('refreshToken', { path: '' });
