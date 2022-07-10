@@ -5,7 +5,7 @@ import Input from '../Input';
 
 import s from './style.module.css';
 
-const SignUpForm = ({ onSubmit, onClose, onChangeForm }) => {
+const SignUpForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pwconfirm, setPwconfirm] = useState('');
@@ -36,8 +36,8 @@ const SignUpForm = ({ onSubmit, onClose, onChangeForm }) => {
   };
 
   useEffect(() => {
-    if (!onClose) clearForm();
-  }, [onClose]);
+    if (!isModalOpen) clearForm();
+  }, [isModalOpen]);
 
   return (
     <form name="login" onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ const SignUpForm = ({ onSubmit, onClose, onChangeForm }) => {
 
 SignUpForm.propTypes = {
   onSubmit: PropTypes.func,
-  onClose: PropTypes.func,
+  isModalOpen: PropTypes.bool,
   onChangeForm: PropTypes.func
 };
 export default SignUpForm;

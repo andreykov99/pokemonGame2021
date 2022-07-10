@@ -15,8 +15,14 @@ const Modal = ({ isOpen, title, children, onCloseModal }) => {
     if (!modalRef.current.contains(e.target)) handleCloseClick();
   };
   const handleKeyPressed = (e) => {
-    console.log(e);
+    console.log(e.code);
     // TODO: if esc pressed close modal
+    // this is not working
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      console.log('escape pressed');
+      handleCloseClick();
+    }
   };
 
   return (
@@ -44,9 +50,9 @@ const Modal = ({ isOpen, title, children, onCloseModal }) => {
   );
 };
 Modal.propTypes = {
-  isOpen: PropTypes.string,
+  isOpen: PropTypes.bool,
   title: PropTypes.string,
-  children: PropTypes.elementType,
+  children: PropTypes.object,
   onCloseModal: PropTypes.func
 };
 export default Modal;

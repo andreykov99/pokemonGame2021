@@ -73,8 +73,8 @@ function headReducer(state, action) {
 
 const MenuHeader = ({ bgActive }) => {
   const initialState = {
-    isActive: null,
-    isModalOpen: null,
+    isActive: false,
+    isModalOpen: false,
     isLoginForm: true
   };
 
@@ -132,13 +132,13 @@ const MenuHeader = ({ bgActive }) => {
         {state.isLoginForm ? (
           <LoginForm
             onSubmit={handleFormSubmit}
-            onClose={state.isModalOpen}
+            isModalOpen={state.isModalOpen}
             onChangeForm={() => dispatch({ type: ACTIONS.SHOW_REGISTER_FORM })}
           />
         ) : (
           <SignUpForm
             onSubmit={handleFormSubmit}
-            onClose={state.isModalOpen}
+            isModalOpen={state.isModalOpen}
             onChangeForm={() => dispatch({ type: ACTIONS.SHOW_LOGIN_FORM })}
           />
         )}

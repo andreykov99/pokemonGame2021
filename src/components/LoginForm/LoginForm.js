@@ -5,7 +5,7 @@ import Input from '../Input';
 
 import s from './style.module.css';
 
-const LoginForm = ({ onSubmit, onClose, onChangeForm }) => {
+const LoginForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isInvalid = password === '' || email === '';
@@ -25,8 +25,8 @@ const LoginForm = ({ onSubmit, onClose, onChangeForm }) => {
   };
 
   useEffect(() => {
-    if (!onClose) clearForm();
-  }, [onClose]);
+    if (!isModalOpen) clearForm();
+  }, [isModalOpen]);
 
   return (
     <form name="login" onSubmit={handleSubmit}>
@@ -58,7 +58,7 @@ const LoginForm = ({ onSubmit, onClose, onChangeForm }) => {
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
-  onClose: PropTypes.func,
+  isModalOpen: PropTypes.bool,
   onChangeForm: PropTypes.func
 };
 

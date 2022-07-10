@@ -30,6 +30,7 @@ Layout.propTypes = {
   title: PropTypes.string,
   urlBg: PropTypes.string,
   colorBg: PropTypes.string,
-  children: PropTypes.elementType
+  // children: PropTypes.elementType
+  children: PropTypes.array
 };
 export default Layout;
