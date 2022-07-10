@@ -1,5 +1,5 @@
 import Header from '../../components/Header';
-import Layout from '../../components/Layout/Layout';
+import Layout from '../../components/Layout';
 import firstImage from './assets/bg1.jpg';
 import secondImage from './assets/bg2.jpg';
 

@@ -1,16 +1,3 @@
-import PropTypes from 'prop-types';
-import { Redirect, Route } from 'react-router';
+import PrivateRoute from './PrivateRoute';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      localStorage.getItem('idToken') ? <Component {...props} /> : <Redirect to="/" />
-    }
-  />
-);
-
-PrivateRoute.propTypes = {
-  component: PropTypes.elementType
-};
 export default PrivateRoute;
