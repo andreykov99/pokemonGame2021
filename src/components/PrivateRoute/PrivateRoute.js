@@ -5,12 +5,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      localStorage.getItem('idToken') ? <Component {...props} /> : <Redirect to="/" />
+      localStorage.getItem('idToken') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/" />
+      )
     }
   />
 );
 
 PrivateRoute.propTypes = {
-  component: PropTypes.elementType
+  component: PropTypes.elementType,
 };
 export default PrivateRoute;

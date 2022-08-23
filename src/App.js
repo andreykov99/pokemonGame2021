@@ -18,7 +18,8 @@ import NotFound from './routes/NotFound';
 
 const App = () => {
   const location = useLocation();
-  const isPadding = location.pathname === '/' || location.pathname === '/game/board';
+  const isPadding =
+    location.pathname === '/' || location.pathname === '/game/board';
 
   return (
     <FirebaseContext.Provider value={FireBase}>
@@ -27,7 +28,9 @@ const App = () => {
         <Route>
           <>
             <MenuHeader bgActive={!isPadding} />
-            <div className={cn(styles.wrap, { [styles.isHomePage]: isPadding })}>
+            <div
+              className={cn(styles.wrap, { [styles.isHomePage]: isPadding })}
+            >
               <Switch>
                 <Route path="/" exact render={() => <HomePage />} />
                 <Route path="/home" render={() => <Redirect to="/" />} />

@@ -6,28 +6,29 @@ export const slice = createSlice({
   initialState: {
     isLoading: true,
     data: {},
-    error: null
+    error: null,
   },
   reducers: {
     fetchPokemons: (state) => ({
       ...state,
-      isLoading: true
+      isLoading: true,
     }),
     fetchPokemonsResolve: (state, action) => ({
       ...state,
       isLoading: false,
-      data: action.payload
+      data: action.payload,
     }),
     fetchPokemonsReject: (state, action) => ({
       ...state,
       isLoading: false,
       data: {},
-      error: action.payload
-    })
-  }
+      error: action.payload,
+    }),
+  },
 });
 
-export const { fetchPokemons, fetchPokemonsResolve, fetchPokemonsReject } = slice.actions;
+export const { fetchPokemons, fetchPokemonsResolve, fetchPokemonsReject } =
+  slice.actions;
 
 export const selectPokemonsLoading = (state) => state.pokemons.isLoading;
 export const selectPokemonsData = (state) => state.pokemons.data;
