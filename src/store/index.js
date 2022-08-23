@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import PokemonsReducer from './pokemons';
+import PokemonsReducer from '../features/pokemons';
 import GameReducer from './game';
+import AuthReducer from '../features/auth';
 
 export default configureStore({
-    reducer: {
-        pokemons: PokemonsReducer,
-        game: GameReducer,
-    }
-})
+  reducer: {
+    auth: AuthReducer,
+    pokemons: PokemonsReducer,
+    game: GameReducer,
+  },
+});
