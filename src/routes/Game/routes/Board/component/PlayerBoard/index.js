@@ -13,7 +13,7 @@ const PlayerBoard = ({ player, cards, onClickCard }) => {
       const result = cards.filter((item) => item.id === id)[0];
       return {
         player,
-        ...result
+        ...result,
       };
     });
   };
@@ -40,6 +40,6 @@ const PlayerBoard = ({ player, cards, onClickCard }) => {
 PlayerBoard.propTypes = {
   player: PropTypes.object,
   cards: PropTypes.array,
-  onClickCard: PropTypes.func
+  onClickCard: PropTypes.func,
 };
 export default PlayerBoard;

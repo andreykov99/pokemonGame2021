@@ -15,7 +15,11 @@ const Header = ({ title, desc }) => {
       <div className={styles.container}>
         <h1>{title}</h1>
         <p>{desc}</p>
-        <button type="button" className={styles.btnCenter} onClick={handleClickButton}>
+        <button
+          type="button"
+          className={styles.btnCenter}
+          onClick={handleClickButton}
+        >
           Start Game
         </button>
       </div>
@@ -25,6 +29,6 @@ const Header = ({ title, desc }) => {
 
 Header.propTypes = {
   title: PropTypes.string,
-  desc: PropTypes.string
+  desc: PropTypes.string,
 };
 export default Header;

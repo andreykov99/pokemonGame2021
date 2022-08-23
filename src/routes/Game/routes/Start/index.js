@@ -2,7 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getPokemonsAsync, selectPokemonsData } from '../../../../store/pokemons';
+import {
+  getPokemonsAsync,
+  selectPokemonsData,
+} from '../../../../store/pokemons';
 
 import PokemonCard from '../../../../components/PokemonCard';
 
@@ -29,8 +32,8 @@ const StartPage = () => {
       ...prevState,
       [key]: {
         ...prevState[key],
-        selected: !prevState[key].selected
-      }
+        selected: !prevState[key].selected,
+      },
     }));
   };
 
@@ -53,24 +56,29 @@ const StartPage = () => {
           </button>
         </div>
         <div className={s.flex}>
-          {Object.entries(pokemons).map(([key, { id, name, type, values, img, selected }]) => (
-            <PokemonCard
-              className={s.card}
-              key={key}
-              id={id}
-              name={name}
-              type={type}
-              values={values}
-              img={img}
-              isActive
-              isSelected={selected}
-              handleCardClick={() => {
-                if (Object.keys(pokemonsContext.pokemons).length < 5 || selected) {
-                  handleCardClick(key);
-                }
-              }}
-            />
-          ))}
+          {Object.entries(pokemons).map(
+            ([key, { id, name, type, values, img, selected }]) => (
+              <PokemonCard
+                className={s.card}
+                key={key}
+                id={id}
+                name={name}
+                type={type}
+                values={values}
+                img={img}
+                isActive
+                isSelected={selected}
+                handleCardClick={() => {
+                  if (
+                    Object.keys(pokemonsContext.pokemons).length < 5 ||
+                    selected
+                  ) {
+                    handleCardClick(key);
+                  }
+                }}
+              />
+            )
+          )}
         </div>
         <div>
           <button

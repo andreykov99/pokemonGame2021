@@ -5,26 +5,27 @@ export const slice = createSlice({
   initialState: {
     player1Cards: [],
     player2Cards: [],
-    board: {}
+    board: {},
   },
   reducers: {
     setPlayer1Cards: (state, action) => ({
       ...state,
-      player1Cards: action.payload
+      player1Cards: action.payload,
     }),
     setPlayer2Cards: (state, action) => ({
       ...state,
-      player2Cards: action.payload
+      player2Cards: action.payload,
     }),
     setBoard: (state, action) => ({
       ...state,
-      board: action.payload
-    })
+      board: action.payload,
+    }),
     // turn: (state, action) => { },
-  }
+  },
 });
 
-export const { setPlayer1Cards, setPlayer2Cards, setBoard, turn } = slice.actions;
+export const { setPlayer1Cards, setPlayer2Cards, setBoard, turn } =
+  slice.actions;
 
 export const getPlayer1Cards = (state) => state.game.player1Cards;
 export const getPlayer2Cards = (state) => state.game.player2Cards;

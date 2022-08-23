@@ -1,49 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import Cookies from 'js-cookie';
-import { apiKey, databaseURL } from '../services/firebaseConfig';
+import { apiKey, databaseURL } from '../../services/firebaseConfig';
 
-const userSlice = createSlice({
-  name: 'user',
-  initialState: {
-    isAuth: false,
-    email: '',
-    idToken: '',
-    localId: '',
-  },
-  reducers: {
-    /**
-     * State user
-     *
-     * 1 request to server login and password
-     * 2 wait server responce
-     * if success set idToken
-     * if error set error
-     */
-
-    login: (state, action) => ({
-      ...state,
-      isAuth: true,
-      email: action.payload.email,
-      idToken: action.payload.idToken,
-      localId: action.payload.localId,
-    }),
-    // logout: (state) => initialState
-  },
-});
-
-export const { login, logout } = userSlice.actions;
-
-export const selectIsLogin = (state) => state.user.isAuth;
-export const getRefreshToken = () => Cookies.get('refresh_token');
-
-// const setError = (errorMsg) => {
-//   console.error('#####:  ', errorMsg);
-// };
-
-export const userLogout = () => (dispatch) => {
-  Cookies.remove('refreshToken', { path: '' });
-  dispatch(logout());
-};
+export const userLogout = () => () => {};
 
 export const userSignUp =
   ({ email, password }) =>
@@ -97,9 +54,6 @@ export const userSignUp =
       savePokemon(pokemons[i], response.localId, response.idToken);
     }
 
-    dispatch(
-      login({ email, idToken: response.idToken, localId: response.localId })
-    );
     // get default pokemons from https://reactmarathon-api.herokuapp.com/api/pokemons/starter
     // save default pokemons to firebase https://<DATABASE_NAME>.firebaseio.com/<USER_UID>/pokemons.json?auth=<ID_TOKEN>
   };
@@ -124,11 +78,6 @@ export const userSignIn =
     //   setError(response.error.message);
     //   return;
     // }
-    dispatch(
-      login({ email, idToken: response.idToken, localId: response.localId })
-    );
-    const expires = new Date(new Date().getTime() + response.expiresIn);
-    Cookies.set('refreshToken', response.refreshToken, { path: '', expires });
   };
 
 export const userRefreshTokens = () => async (dispatch, token) => {
@@ -149,5 +98,3 @@ export const userRefreshTokens = () => async (dispatch, token) => {
   // }
   console.log('#####: response ', response);
 };
-
-export default userSlice.reducer;

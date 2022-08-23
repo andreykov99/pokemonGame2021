@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import { useEffect, useReducer } from 'react';
 import { useSelector } from 'react-redux';
 
-import { userSignIn, userSignUp, selectIsLogin, userLogout } from '../../store/user';
+import {
+  userSignIn,
+  userSignUp,
+  selectIsLogin,
+  userLogout,
+} from '../../store/user';
 
 import Navbar from '../Navbar';
 import Menu from '../Menu';
@@ -17,7 +22,7 @@ const ACTIONS = {
   OPEN_MODAL: 'OPEN_MODAL',
   CLOSE_MODAL: 'CLOSE_MODAL',
   SHOW_LOGIN_FORM: 'SHOW_LOGIN_FORM',
-  SHOW_REGISTER_FORM: 'SHOW_REGISTER_FORM'
+  SHOW_REGISTER_FORM: 'SHOW_REGISTER_FORM',
 };
 
 function headReducer(state, action) {
@@ -26,43 +31,43 @@ function headReducer(state, action) {
     case ACTIONS.SHOW_MENU: {
       return {
         ...state,
-        isActive: true
+        isActive: true,
       };
     }
     case ACTIONS.HIDE_MENU: {
       return {
         ...state,
-        isActive: false
+        isActive: false,
       };
     }
     case ACTIONS.TOGGLE_MENU: {
       return {
         ...state,
-        isActive: !state.isActive
+        isActive: !state.isActive,
       };
     }
     case ACTIONS.OPEN_MODAL: {
       return {
         ...state,
-        isModalOpen: true
+        isModalOpen: true,
       };
     }
     case ACTIONS.CLOSE_MODAL: {
       return {
         ...state,
-        isModalOpen: false
+        isModalOpen: false,
       };
     }
     case ACTIONS.SHOW_LOGIN_FORM: {
       return {
         ...state,
-        isLoginForm: true
+        isLoginForm: true,
       };
     }
     case ACTIONS.SHOW_REGISTER_FORM: {
       return {
         ...state,
-        isLoginForm: false
+        isLoginForm: false,
       };
     }
     default: {
@@ -75,7 +80,7 @@ const MenuHeader = ({ bgActive }) => {
   const initialState = {
     isActive: false,
     isModalOpen: false,
-    isLoginForm: true
+    isLoginForm: true,
   };
 
   const [state, dispatch] = useReducer(headReducer, initialState);
@@ -111,7 +116,9 @@ const MenuHeader = ({ bgActive }) => {
   };
 
   useEffect(() => {
-    document.querySelector('body').style.overflow = state.isModalOpen ? 'hidden' : null;
+    document.querySelector('body').style.overflow = state.isModalOpen
+      ? 'hidden'
+      : null;
   }, [state.isModalOpen]);
 
   return (
@@ -148,7 +155,7 @@ const MenuHeader = ({ bgActive }) => {
 };
 
 MenuHeader.propTypes = {
-  bgActive: PropTypes.bool
+  bgActive: PropTypes.bool,
 };
 
 export default MenuHeader;

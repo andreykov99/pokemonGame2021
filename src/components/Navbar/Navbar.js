@@ -5,7 +5,13 @@ import { ReactComponent as LoginSvg } from './assets/login.svg';
 import { ReactComponent as LogoutSvg } from './assets/logout.svg';
 import logo from './assets/logo.png';
 
-const Navbar = ({ onMenuButtonChange, onClickLogin, bgActive, isActive, isLogin }) => {
+const Navbar = ({
+  onMenuButtonChange,
+  onClickLogin,
+  bgActive,
+  isActive,
+  isLogin,
+}) => {
   const handleClickMenuButton = () => {
     onMenuButtonChange();
   };
@@ -50,6 +56,6 @@ Navbar.propTypes = {
   onClickLogin: PropTypes.func,
   bgActive: PropTypes.bool,
   isActive: PropTypes.bool,
-  isLogin: PropTypes.bool
+  isLogin: PropTypes.bool,
 };
 export default Navbar;

@@ -24,13 +24,13 @@ const SignUpForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
       // show error
       setErrors((prev) => ({
         ...prev,
-        pwconfirm: 'passwords may be some'
+        pwconfirm: 'passwords may be some',
       }));
       return;
     }
     onSubmit({
       email,
-      password
+      password,
     });
     clearForm();
   };
@@ -41,7 +41,12 @@ const SignUpForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
 
   return (
     <form name="login" onSubmit={handleSubmit}>
-      <Input name="email" label="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <Input
+        name="email"
+        label="E-mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <Input
         type="password"
         name="password"
@@ -77,6 +82,6 @@ const SignUpForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
 SignUpForm.propTypes = {
   onSubmit: PropTypes.func,
   isModalOpen: PropTypes.bool,
-  onChangeForm: PropTypes.func
+  onChangeForm: PropTypes.func,
 };
 export default SignUpForm;

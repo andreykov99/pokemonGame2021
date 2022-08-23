@@ -21,7 +21,7 @@ const GamePage = () => {
       }
       return {
         ...prevState,
-        [key]: pokemon
+        [key]: pokemon,
       };
     });
   };
@@ -37,7 +37,7 @@ const GamePage = () => {
         onSelectedPokemons: handleSelectedPokemons,
         clearSelectedPokemons: handleClearSelected,
         pokemons2: player2Pokemons,
-        setPokemons2: setPlayer2Pokemons
+        setPokemons2: setPlayer2Pokemons,
       }}
     >
       <Switch>

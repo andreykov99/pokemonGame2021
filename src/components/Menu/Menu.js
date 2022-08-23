@@ -6,20 +6,20 @@ import styles from './style.module.css';
 const MENU = [
   {
     title: 'HOME',
-    to: '/'
+    to: '/',
   },
   {
     title: 'GAME',
-    to: '/game'
+    to: '/game',
   },
   {
     title: 'ABOUT',
-    to: '/about'
+    to: '/about',
   },
   {
     title: 'CONTACT',
-    to: '/contact'
-  }
+    to: '/contact',
+  },
 ];
 
 const Menu = ({ isActive, closeMenu }) => {
@@ -51,6 +51,6 @@ const Menu = ({ isActive, closeMenu }) => {
 };
 Menu.propTypes = {
   isActive: PropTypes.bool,
-  closeMenu: PropTypes.func
+  closeMenu: PropTypes.func,
 };
 export default Menu;

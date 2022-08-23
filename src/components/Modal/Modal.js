@@ -53,6 +53,6 @@ Modal.propTypes = {
   isOpen: PropTypes.bool,
   title: PropTypes.string,
   children: PropTypes.object,
-  onCloseModal: PropTypes.func
+  onCloseModal: PropTypes.func,
 };
 export default Modal;

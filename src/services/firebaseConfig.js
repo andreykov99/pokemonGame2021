@@ -5,7 +5,7 @@ const config = {
   projectId: 'pokemon-game-939fe',
   storageBucket: 'pokemon-game-939fe.appspot.com',
   messagingSenderId: '719445172974',
-  appId: '1:719445172974:web:e286a395ac1395d55a49ff'
+  appId: '1:719445172974:web:e286a395ac1395d55a49ff',
 };
 
 export const { apiKey, databaseURL } = config;

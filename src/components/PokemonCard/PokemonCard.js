@@ -14,7 +14,7 @@ const PokemonCard = ({
   isActive,
   isSelected,
   possession,
-  handleCardClick
+  handleCardClick,
 }) => {
   const handleClick = () => {
     handleCardClick(id);
@@ -25,7 +25,7 @@ const PokemonCard = ({
       tabIndex={0}
       className={cn(className, s.pokemonCard, {
         [s.active]: isActive,
-        [s.selected]: isSelected
+        [s.selected]: isSelected,
       })}
       onClick={handleClick}
       onKeyPress={handleClick}
@@ -75,7 +75,7 @@ PokemonCard.propTypes = {
   isActive: PropTypes.bool,
   isSelected: PropTypes.bool,
   possession: PropTypes.string,
-  handleCardClick: PropTypes.func
+  handleCardClick: PropTypes.func,
 };
 
 export default PokemonCard;

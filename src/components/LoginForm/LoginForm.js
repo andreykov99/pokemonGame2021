@@ -19,7 +19,7 @@ const LoginForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
     e.preventDefault();
     onSubmit({
       email,
-      password
+      password,
     });
     clearForm();
   };
@@ -30,7 +30,12 @@ const LoginForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
 
   return (
     <form name="login" onSubmit={handleSubmit}>
-      <Input name="email" label="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <Input
+        name="email"
+        label="E-mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <Input
         type="password"
         name="password"
@@ -59,7 +64,7 @@ const LoginForm = ({ onSubmit, isModalOpen, onChangeForm }) => {
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
   isModalOpen: PropTypes.bool,
-  onChangeForm: PropTypes.func
+  onChangeForm: PropTypes.func,
 };
 
 export default LoginForm;
