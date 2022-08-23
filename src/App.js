@@ -18,11 +18,10 @@ import PrivateRoute from './components/PrivateRoute';
 import cn from 'classnames';
 import styles from './style.module.css';
 
-
-
 const App = () => {
   const location = useLocation();
-  const isPadding = location.pathname === '/' || location.pathname === '/game/board';
+  const isPadding =
+    location.pathname === '/' || location.pathname === '/game/board';
 
   return (
     <FirebaseContext.Provider value={FireBase}>
@@ -31,27 +30,25 @@ const App = () => {
         <Route>
           <>
             <MenuHeader bgActive={!isPadding} />
-            <div className={cn(styles.wrap, { [styles.isHomePage]: isPadding })}>
+            <div
+              className={cn(styles.wrap, { [styles.isHomePage]: isPadding })}
+            >
               <Switch>
-                <Route path="/" exact render={() => (<HomePage />)} />
-                <Route path="/home" render={() => (
-                  <Redirect to="/" />
-                )} />
+                <Route path="/" exact render={() => <HomePage />} />
+                <Route path="/home" render={() => <Redirect to="/" />} />
                 <PrivateRoute path="/game" component={GamePage} />
                 <PrivateRoute path="/about" component={AboutPage} />
                 <Route path="/contact" component={ContactPage} />
-                <Route render={() => (
-                  <Redirect to="/404" />
-                )} />
+                <Route render={() => <Redirect to="/404" />} />
               </Switch>
             </div>
             <Footer />
           </>
         </Route>
-      </Switch >
+      </Switch>
       <NotificationContainer />
     </FirebaseContext.Provider>
-  )
-}
+  );
+};
 
 export default App;
