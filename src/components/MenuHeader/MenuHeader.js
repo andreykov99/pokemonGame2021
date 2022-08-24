@@ -2,18 +2,17 @@ import PropTypes from 'prop-types';
 import { useEffect, useReducer } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  userSignIn,
-  userSignUp,
-  selectIsLogin,
-  userLogout,
-} from '../../store/user';
-
 import Navbar from '../Navbar';
 import Menu from '../Menu';
 import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 import SignUpForm from '../SignUpForm';
+
+// dummy function will be edited
+const userSignIn = () => {};
+const selectIsLogin = () => {};
+const userLogout = () => {};
+const userSignUp = () => {};
 
 const ACTIONS = {
   SHOW_MENU: 'SHOW_MENU',

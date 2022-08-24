@@ -98,3 +98,11 @@ export const userRefreshTokens = () => async (dispatch, token) => {
   // }
   console.log('#####: response ', response);
 };
+
+const authService = {
+  register: () => {},
+  logout: () => {},
+  login: () => {},
+};
+
+export default authService;

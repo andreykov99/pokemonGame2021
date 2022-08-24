@@ -2,16 +2,18 @@ import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  getPokemonsAsync,
-  selectPokemonsData,
-} from '../../../../store/pokemons';
-
 import PokemonCard from '../../../../components/PokemonCard';
 
 import PokemonsContext from '../../../../context/PokemonsContext';
 
 import s from './style.module.css';
+
+// import {
+//   getPokemonsAsync,
+//   selectPokemonsData,
+// } from '../../../../features/pokemons';
+const getPokemonsAsync = () => {};
+const selectPokemonsData = {};
 
 const StartPage = () => {
   // const firebaseContext = useContext(FirebaseContext);

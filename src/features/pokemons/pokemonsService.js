@@ -1,11 +1,11 @@
 import FireBase from '../../services/firebase';
 
-export const get = async () => {
-  return await FireBase.getPokemonsOnce();
-};
+const getPokemons = async () => FireBase.getPokemonsOnce();
 
 const pokemonsService = {
-  get,
+  getPokemons,
+  addPokemon: () => {},
+  deletePokemon: () => {},
 };
 
 export default pokemonsService;
