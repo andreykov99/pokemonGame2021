@@ -4,8 +4,6 @@ import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import cn from 'classnames';
 import styles from './style.module.css';
-import FireBase from './services/firebase';
-import FirebaseContext from './context/FirebaseContext';
 import PrivateRoute from './components/PrivateRoute';
 
 import GamePage from './routes/Game';
@@ -22,7 +20,7 @@ const App = () => {
     location.pathname === '/' || location.pathname === '/game/board';
 
   return (
-    <FirebaseContext.Provider value={FireBase}>
+    <>
       <Switch>
         <Route path="/404" component={NotFound} />
         <Route>
@@ -45,7 +43,7 @@ const App = () => {
         </Route>
       </Switch>
       <NotificationContainer />
-    </FirebaseContext.Provider>
+    </>
   );
 };
 

@@ -5,13 +5,14 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import App from './App';
+import './services/firebase';
 import './index.css';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </Provider>,
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );

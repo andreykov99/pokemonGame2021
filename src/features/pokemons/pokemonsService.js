@@ -1,4 +1,4 @@
-import FireBase from '../../services/firebase';
+import FireBase from '../../services/firebasePokemons';
 
 const getPokemons = async () => FireBase.getPokemonsOnce();
 
