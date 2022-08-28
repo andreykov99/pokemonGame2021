@@ -1,151 +1,87 @@
 import PropTypes from 'prop-types';
-import { useEffect, useReducer } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Navbar from '../Navbar';
 import Menu from '../Menu';
 import Modal from '../Modal';
 import LoginForm from '../LoginForm';
 import SignUpForm from '../SignUpForm';
-
-// dummy function will be edited
-const userSignIn = () => {};
-const selectIsLogin = () => {};
-const userLogout = () => {};
-const userSignUp = () => {};
-
-const ACTIONS = {
-  SHOW_MENU: 'SHOW_MENU',
-  HIDE_MENU: 'HIDE_MENU',
-  TOGGLE_MENU: 'TOGGLE_MENU',
-  OPEN_MODAL: 'OPEN_MODAL',
-  CLOSE_MODAL: 'CLOSE_MODAL',
-  SHOW_LOGIN_FORM: 'SHOW_LOGIN_FORM',
-  SHOW_REGISTER_FORM: 'SHOW_REGISTER_FORM',
-};
-
-function headReducer(state, action) {
-  const { type } = action;
-  switch (type) {
-    case ACTIONS.SHOW_MENU: {
-      return {
-        ...state,
-        isActive: true,
-      };
-    }
-    case ACTIONS.HIDE_MENU: {
-      return {
-        ...state,
-        isActive: false,
-      };
-    }
-    case ACTIONS.TOGGLE_MENU: {
-      return {
-        ...state,
-        isActive: !state.isActive,
-      };
-    }
-    case ACTIONS.OPEN_MODAL: {
-      return {
-        ...state,
-        isModalOpen: true,
-      };
-    }
-    case ACTIONS.CLOSE_MODAL: {
-      return {
-        ...state,
-        isModalOpen: false,
-      };
-    }
-    case ACTIONS.SHOW_LOGIN_FORM: {
-      return {
-        ...state,
-        isLoginForm: true,
-      };
-    }
-    case ACTIONS.SHOW_REGISTER_FORM: {
-      return {
-        ...state,
-        isLoginForm: false,
-      };
-    }
-    default: {
-      throw new Error(`Unsupported action type: ${type}`);
-    }
-  }
-}
+import { register, login, logout } from '../../features/auth/authSlice';
+import {
+  toggleMenu,
+  openModal,
+  closeModal,
+  showLogin,
+  showRegister,
+} from '../../features/header/headerSlice';
 
 const MenuHeader = ({ bgActive }) => {
-  const initialState = {
-    isActive: false,
-    isModalOpen: false,
-    isLoginForm: true,
-  };
-
-  const [state, dispatch] = useReducer(headReducer, initialState);
-
-  // const dispatch = useDispatch();
-  // const userIsLogin = useSelector(selectIsLogin);
-  const userIsLogin = useSelector(selectIsLogin);
+  const dispatch = useDispatch();
+  const { isActive, isModalOpen, isLoginForm } = useSelector(
+    (state) => state.header
+  );
+  const { user } = useSelector((state) => state.auth);
+  const userIsLogin = !!user;
 
   const handleMenuButtonChange = () => {
-    dispatch({ type: ACTIONS.TOGGLE_MENU });
+    dispatch(toggleMenu());
   };
 
   const handleClickLogin = () => {
     if (userIsLogin) {
-      dispatch(userLogout());
+      dispatch(logout());
     } else {
-      dispatch({ type: ACTIONS.OPEN_MODAL });
+      dispatch(openModal());
     }
   };
 
   const handleCloseModal = () => {
-    dispatch({ type: ACTIONS.CLOSE_MODAL });
+    dispatch(closeModal());
   };
 
   const handleFormSubmit = ({ email, password }) => {
-    if (state.isLoginForm) {
-      dispatch(userSignIn({ email, password }));
+    if (isLoginForm) {
+      dispatch(login({ email, password }));
       handleCloseModal();
       return;
     }
-    dispatch(userSignUp({ email, password }));
+    dispatch(register({ email, password }));
     handleCloseModal();
   };
 
   useEffect(() => {
-    document.querySelector('body').style.overflow = state.isModalOpen
+    document.querySelector('body').style.overflow = isModalOpen
       ? 'hidden'
       : null;
-  }, [state.isModalOpen]);
+  }, [isModalOpen]);
 
   return (
     <>
       <Navbar
         onMenuButtonChange={handleMenuButtonChange}
         onClickLogin={handleClickLogin}
-        isActive={state.isActive}
+        isActive={isActive}
         bgActive={bgActive}
         isLogin={userIsLogin}
       />
-      <Menu isActive={state.isActive} closeMenu={handleMenuButtonChange} />
+      <Menu isActive={isActive} closeMenu={handleMenuButtonChange} />
       <Modal
-        isOpen={state.isModalOpen}
+        isOpen={isModalOpen}
         title="Please login to start game"
         onCloseModal={handleCloseModal}
       >
-        {state.isLoginForm ? (
+        {isLoginForm ? (
           <LoginForm
             onSubmit={handleFormSubmit}
-            isModalOpen={state.isModalOpen}
-            onChangeForm={() => dispatch({ type: ACTIONS.SHOW_REGISTER_FORM })}
+            isModalOpen={isModalOpen}
+            onChangeForm={() => dispatch(showRegister())}
           />
         ) : (
           <SignUpForm
             onSubmit={handleFormSubmit}
-            isModalOpen={state.isModalOpen}
-            onChangeForm={() => dispatch({ type: ACTIONS.SHOW_LOGIN_FORM })}
+            isModalOpen={isModalOpen}
+            onChangeForm={() => dispatch(showLogin())}
           />
         )}
       </Modal>
