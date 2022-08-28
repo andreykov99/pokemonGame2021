@@ -15,7 +15,7 @@ const Modal = ({ isOpen, title, children, onCloseModal }) => {
     if (!modalRef.current.contains(e.target)) handleCloseClick();
   };
   const handleKeyPressed = (e) => {
-    console.log(e.code);
+    // console.log(e.code);
     // TODO: if esc pressed close modal
     // this is not working
     if (e.key === 'Escape') {
