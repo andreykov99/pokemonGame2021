@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import FirebaseContext from '../../../../context/FirebaseContext';
 import PokemonsContext from '../../../../context/PokemonsContext';
 import PokemonCard from '../../../../components/PokemonCard';
 
 import s from './style.module.css';
 
 const FinishPage = () => {
-  const firebaseContext = useContext(FirebaseContext);
+  // todo: dummy function will be deleted
+  const addPokemon = () => {};
   const { pokemons, pokemons2 } = useContext(PokemonsContext);
   const history = useHistory();
   const [isSelected, setSelected] = useState(null);
@@ -23,7 +23,7 @@ const FinishPage = () => {
 
   const handleEndButton = () => {
     const pokemon = pokemons2.filter((item) => item.id === isSelected)[0];
-    firebaseContext.addPokemon(pokemon, () => history.push('/game'));
+    addPokemon(pokemon, () => history.push('/game'));
   };
 
   return (
