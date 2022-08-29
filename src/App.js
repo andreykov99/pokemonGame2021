@@ -1,50 +1,36 @@
-import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
-
+import { Route, Routes } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import cn from 'classnames';
-import styles from './style.module.css';
-import PrivateRoute from './components/PrivateRoute';
+import { PrivateRoute } from './components/PrivateRoute';
+import { GamePage } from './routes/Game';
+import { HomePage } from './routes/Home';
+import { AboutPage } from './routes/About';
+import { ContactPage } from './routes/Contact';
+import { NotFoundPage } from './routes/NotFound';
+import { StartPage } from './routes/Start';
+import { BoardPage } from './routes/Board';
+import { FinishPage } from './routes/Finish';
+import { AppLayout } from './components/AppLayout/AppLayout';
 
-import GamePage from './routes/Game';
-import HomePage from './routes/Home';
-import AboutPage from './routes/About';
-import ContactPage from './routes/Contact';
-import MenuHeader from './components/MenuHeader';
-import Footer from './components/Footer';
-import NotFound from './routes/NotFound';
-
-const App = () => {
-  const location = useLocation();
-  const isPadding =
-    location.pathname === '/' || location.pathname === '/game/board';
-
-  return (
-    <>
-      <Switch>
-        <Route path="/404" component={NotFound} />
-        <Route>
-          <>
-            <MenuHeader bgActive={!isPadding} />
-            <div
-              className={cn(styles.wrap, { [styles.isHomePage]: isPadding })}
-            >
-              <Switch>
-                <Route path="/" exact render={() => <HomePage />} />
-                <Route path="/home" render={() => <Redirect to="/" />} />
-                <PrivateRoute path="/game" component={GamePage} />
-                <PrivateRoute path="/about" component={AboutPage} />
-                <Route path="/contact" component={ContactPage} />
-                <Route render={() => <Redirect to="/404" />} />
-              </Switch>
-            </div>
-            <Footer />
-          </>
+const App = () => (
+  <>
+    <Routes>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="contact" element={ContactPage} />
+        <Route element={<PrivateRoute />}>
+          <Route path="game" element={GamePage}>
+            <Route index element={StartPage} />
+            <Route path="board" element={BoardPage} />
+            <Route path="finish" element={FinishPage} />
+          </Route>
+          <Route path="about" element={AboutPage} />
         </Route>
-      </Switch>
-      <NotificationContainer />
-    </>
-  );
-};
+        <Route path="*" element={NotFoundPage} />
+      </Route>
+    </Routes>
+    <NotificationContainer />
+  </>
+);
 
 export default App;
