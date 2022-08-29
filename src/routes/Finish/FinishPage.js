@@ -1,20 +1,21 @@
-import { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import PokemonsContext from '../../../../context/PokemonsContext';
-import PokemonCard from '../../../../components/PokemonCard';
+import PokemonCard from '../../components/PokemonCard';
 
 import s from './style.module.css';
 
 const FinishPage = () => {
   // todo: dummy function will be deleted
   const addPokemon = () => {};
-  const { pokemons, pokemons2 } = useContext(PokemonsContext);
-  const history = useHistory();
+  const pokemons = [];
+  const pokemons2 = [];
+
+  const navigate = useNavigate();
   const [isSelected, setSelected] = useState(null);
 
   if (Object.keys(pokemons).length === 0) {
-    history.replace('/game');
+    navigate('/game', { replace: true });
   }
 
   const handleCardClick = (id) => {
@@ -23,7 +24,7 @@ const FinishPage = () => {
 
   const handleEndButton = () => {
     const pokemon = pokemons2.filter((item) => item.id === isSelected)[0];
-    addPokemon(pokemon, () => history.push('/game'));
+    addPokemon(pokemon, () => navigate('/game'));
   };
 
   return (
@@ -65,4 +66,4 @@ const FinishPage = () => {
   );
 };
 
-export default FinishPage;
+export { FinishPage };
