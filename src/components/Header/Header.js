@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './style.module.css';
 
 const Header = ({ title, desc }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleClickButton = () => {
-    history.push('/game');
+    navigate('/game');
   };
   return (
     <header className={styles.root}>
