@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useState } from 'react';
-import PokemonCard from '../../../../../../components/PokemonCard';
+import PokemonCard from '../PokemonCard';
 
 import s from './style.module.css';
 
@@ -42,4 +42,4 @@ PlayerBoard.propTypes = {
   cards: PropTypes.array,
   onClickCard: PropTypes.func,
 };
-export default PlayerBoard;
+export { PlayerBoard };
