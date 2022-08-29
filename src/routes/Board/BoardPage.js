@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import PokemonCard from '../../../../components/PokemonCard';
-import PokemonsContext from '../../../../context/PokemonsContext';
-import PlayerBoard from './component/PlayerBoard';
+import PokemonCard from '../../components/PokemonCard';
+import { PlayerBoard } from '../../components/PlayerBoard';
 
 import s from './style.module.css';
 
@@ -23,7 +22,9 @@ const counterWin = (board, player1, player2) => {
 };
 
 const BoardPage = () => {
-  const { pokemons, setPokemons2 } = useContext(PokemonsContext);
+  // todo:
+  const pokemons = [];
+  const setPokemons2 = () => {};
 
   const [board, setBoard] = useState([]);
   const [steps, setSteps] = useState(0);
@@ -36,9 +37,9 @@ const BoardPage = () => {
     }))
   );
 
-  const history = useHistory();
+  const navigate = useNavigate();
   if (Object.keys(pokemons).length === 0) {
-    history.replace('/game');
+    navigate('/game', { replace: true });
   }
 
   const handleClickBoardPlate = (position) => {
@@ -86,9 +87,9 @@ const BoardPage = () => {
     if (steps === 9) {
       const [count1, count2] = counterWin(board, player1, player2);
       alert(getMessage(count1, count2));
-      history.push('/game/finish');
+      navigate('/game/finish');
     }
-  }, [steps, board, player1, player2, history]);
+  }, [steps, board, player1, player2, navigate]);
 
   const fetchData = async () => {
     const boardResponse = await fetch(
@@ -151,4 +152,4 @@ const BoardPage = () => {
   );
 };
 
-export default BoardPage;
+export { BoardPage };
