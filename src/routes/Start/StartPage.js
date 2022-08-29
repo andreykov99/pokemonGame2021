@@ -1,35 +1,24 @@
-import { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
-import PokemonCard from '../../../../components/PokemonCard';
-
-import PokemonsContext from '../../../../context/PokemonsContext';
-
+import PokemonCard from '../../components/PokemonCard';
 import s from './style.module.css';
-
-// import {
-//   getPokemonsAsync,
-//   selectPokemonsData,
-// } from '../../../../features/pokemons';
-const getPokemonsAsync = () => {};
-const selectPokemonsData = {};
+import { getPokemonsAsync } from '../../features/pokemons/pokemonsSlice';
 
 const StartPage = () => {
-  // const firebaseContext = useContext(FirebaseContext);
-  const pokemonsContext = useContext(PokemonsContext);
+  const selectPokemonsData = useSelector((state) => state.pokemons.data);
   const [pokemons, setPokemons] = useState({});
-  const history = useHistory();
+  const navigate = useNavigate();
   const pokemonsRedux = useSelector(selectPokemonsData);
   const dispatch = useDispatch();
 
   const handleStartGame = () => {
-    history.push('/game/board');
+    navigate('/game/board');
   };
 
   const handleCardClick = (key) => {
     const pokemon = { ...pokemons[key] };
-    pokemonsContext.onSelectedPokemons(key, pokemon);
+    onSelectedPokemons(key, pokemon);
     setPokemons((prevState) => ({
       ...prevState,
       [key]: {
@@ -53,7 +42,7 @@ const StartPage = () => {
       <div className={s.root}>
         <h2>Select 5 cards and click Start</h2>
         <div>
-          <button type="button" onClick={pokemonsContext.clearSelectedPokemons}>
+          <button type="button" onClick={clearSelectedPokemons}>
             CLEAR
           </button>
         </div>
@@ -71,10 +60,7 @@ const StartPage = () => {
                 isActive
                 isSelected={selected}
                 handleCardClick={() => {
-                  if (
-                    Object.keys(pokemonsContext.pokemons).length < 5 ||
-                    selected
-                  ) {
+                  if (Object.keys(pokemons).length < 5 || selected) {
                     handleCardClick(key);
                   }
                 }}
@@ -86,7 +72,7 @@ const StartPage = () => {
           <button
             type="button"
             onClick={handleStartGame}
-            disabled={Object.keys(pokemonsContext.pokemons).length < 5}
+            disabled={Object.keys(pokemons).length < 5}
           >
             Start Game
           </button>
@@ -95,4 +81,4 @@ const StartPage = () => {
     </>
   );
 };
-export default StartPage;
+export { StartPage };
