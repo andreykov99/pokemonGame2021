@@ -1,20 +1,9 @@
-import PropTypes from 'prop-types';
-import { Redirect, Route } from 'react-router';
+import { Outlet, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      localStorage.getItem('idToken') ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/" />
-      )
-    }
-  />
-);
-
-PrivateRoute.propTypes = {
-  component: PropTypes.elementType,
+const PrivateRoute = () => {
+  const { user } = useSelector((state) => state.auth);
+  return user ? <Outlet /> : <Navigate to="/" />;
 };
-export default PrivateRoute;
+
+export { PrivateRoute };
