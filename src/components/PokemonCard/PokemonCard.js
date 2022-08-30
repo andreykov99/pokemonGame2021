@@ -57,7 +57,7 @@ const PokemonCard = ({
 
       <div className={s.cardBack}>
         <div className={cn(s.wrap, s.back)}>
-          <img src={cardBackImg} alt="Сard Backed" />
+          <img src={cardBackImg} alt="Card Backed" />
         </div>
       </div>
     </div>
@@ -69,9 +69,9 @@ PokemonCard.propTypes = {
   minimize: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
-  values: PropTypes.string,
+  values: PropTypes.object,
   img: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.number,
   isActive: PropTypes.bool,
   isSelected: PropTypes.bool,
   possession: PropTypes.string,
