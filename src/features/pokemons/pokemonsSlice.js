@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getPokemons } from './pokemonsService';
+import { getPokemons, getDefaultPokemons } from './pokemonsService';
+
+const getErrorMessage = (error) =>
+  (error.response && error.response.data && error.response.data.message) ||
+  error.message ||
+  error.toString();
 
 export const getPokemonsAsync = createAsyncThunk(
   'pokemons/getPokemonsAsync',
@@ -7,13 +12,17 @@ export const getPokemonsAsync = createAsyncThunk(
     try {
       return await getPokemons();
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+export const getDefaultPokemonsAsync = createAsyncThunk(
+  'pokemons/getDefaultPokemonsAsync',
+  async (thunkAPI) => {
+    try {
+      return await getDefaultPokemons();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
     }
   }
 );
@@ -35,6 +44,19 @@ export const pokemonsSlice = createSlice({
       state.data = action.payload;
     },
     [getPokemonsAsync.rejected]: (state, action) => {
+      state.status = 'error';
+      state.data = {};
+      state.message = action.payload;
+    },
+    [getDefaultPokemonsAsync.pending]: (state) => {
+      state.status = 'loading';
+      state.message = '';
+    },
+    [getDefaultPokemonsAsync.fulfilled]: (state, action) => {
+      state.status = 'resolved';
+      state.data = action.payload;
+    },
+    [getDefaultPokemonsAsync.rejected]: (state, action) => {
       state.status = 'error';
       state.data = {};
       state.message = action.payload;
