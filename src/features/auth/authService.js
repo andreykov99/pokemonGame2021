@@ -12,12 +12,18 @@ export const logoutUser = async () => {
 
 export const registerUser = async ({ email, password }) => {
   const response = await createUserWithEmailAndPassword(auth, email, password);
-  return response.user;
+  if (response.user) {
+    localStorage.setItem('user', JSON.stringify(response.user));
+  }
+  return response.user.toJSON();
 };
 
 export const loginUser = async ({ email, password }) => {
   const response = await signInWithEmailAndPassword(auth, email, password);
-  return response.user;
+  if (response.user) {
+    localStorage.setItem('user', JSON.stringify(response.user));
+  }
+  return response.user.toJSON();
 };
 
 const authService = {
