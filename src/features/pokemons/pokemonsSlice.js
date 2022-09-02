@@ -1,10 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getPokemons, getDefaultPokemons } from './pokemonsService';
-
-const getErrorMessage = (error) =>
-  (error.response && error.response.data && error.response.data.message) ||
-  error.message ||
-  error.toString();
+import { getErrorMessage } from '../../hooks/useError';
 
 export const getPokemonsAsync = createAsyncThunk(
   'pokemons/getPokemonsAsync',
@@ -31,8 +27,16 @@ export const pokemonsSlice = createSlice({
   name: 'pokemons',
   initialState: {
     status: 'idle',
-    data: {},
+    data: [],
     message: '',
+  },
+  reducers: {
+    selectPokemonCard: (state, action) => {
+      const index = state.data.findIndex(
+        (pokemon) => pokemon.key === action.payload
+      );
+      state.data[index].selected = !state.data[index].selected;
+    },
   },
   extraReducers: {
     [getPokemonsAsync.pending]: (state) => {
@@ -64,4 +68,5 @@ export const pokemonsSlice = createSlice({
   },
 });
 
+export const { selectPokemonCard } = pokemonsSlice.actions;
 export default pokemonsSlice.reducer;

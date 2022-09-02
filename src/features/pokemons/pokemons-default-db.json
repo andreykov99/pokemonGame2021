@@ -1,6 +1,6 @@
 {
   "pokemons": {
-    "-MSjWsPjJfFkNKk6ixPF": {
+    "default-1": {
       "abilities": ["keen-eye", "tangled-feet", "big-pecks"],
       "base_experience": 122,
       "height": 11,
@@ -24,7 +24,7 @@
         "left": 2
       }
     },
-    "-MSjWsPo_nEu6XI67Jjz": {
+    "default-2": {
       "abilities": ["intimidate", "shed-skin", "unnerve"],
       "base_experience": 157,
       "height": 35,
@@ -48,7 +48,7 @@
         "left": 8
       }
     },
-    "-MSjWsPo_nEu6XI67Jk-": {
+    "default-3": {
       "abilities": ["static", "lightning-rod"],
       "base_experience": 112,
       "height": 4,
@@ -72,7 +72,7 @@
         "left": 5
       }
     },
-    "-MSjWsPps4Nua-6dEPjC": {
+    "default-4": {
       "abilities": ["overgrow", "chlorophyll"],
       "base_experience": 64,
       "height": 7,
@@ -96,7 +96,7 @@
         "left": 4
       }
     },
-    "-MSjWsPq2RMOHZogNmW5": {
+    "default-5": {
       "abilities": ["blaze", "solar-power"],
       "base_experience": 62,
       "height": 6,
