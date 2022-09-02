@@ -1,46 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {
+  getBoardAsync,
+  getPlayer2CardsAsync,
+  getPlayersTurnAsync,
+} from '../../features/game/gameSlice';
 
 import PokemonCard from '../../components/PokemonCard';
 import { PlayerBoard } from '../../components/PlayerBoard';
-
 import s from './style.module.css';
 
-const counterWin = (board, player1, player2) => {
-  let player1Count = player1.length;
-  let player2Count = player2.length;
-
-  board.forEach((item) => {
-    if (item.card.possession === 'blue') {
-      player1Count += 1;
-    }
-    if (item.card.possession === 'red') {
-      player2Count += 1;
-    }
-  });
-  return [player1Count, player2Count];
-};
-
 const BoardPage = () => {
-  // todo:
-  const pokemons = [];
-  const setPokemons2 = () => {};
-
-  const [board, setBoard] = useState([]);
-  const [steps, setSteps] = useState(0);
-  const [player2, setPlayer2] = useState([]);
-  const [choiseCard, setChoiseCard] = useState(null);
-  const [player1, setPlayer1] = useState(() =>
-    Object.values(pokemons).map((item) => ({
-      ...item,
-      possession: 'blue',
-    }))
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { player1Cards, player2Cards, board, steps, choiseCard } = useSelector(
+    (state) => state.game
   );
 
-  const navigate = useNavigate();
-  if (Object.keys(pokemons).length === 0) {
-    navigate('/game', { replace: true });
-  }
+  const counterWin = (board, player1Cards, player2Cards) => {
+    let player1Count = player1Cards.length;
+    let player2Count = player2Cards.length;
+
+    board.forEach((item) => {
+      if (item.card.possession === 'blue') {
+        player1Count += 1;
+      }
+      if (item.card.possession === 'red') {
+        player2Count += 1;
+      }
+    });
+    return [player1Count, player2Count];
+  };
+
+  // if (Object.keys(player1).length === 0) {
+  //   navigate('/game/start');
+  // }
 
   const handleClickBoardPlate = (position) => {
     if (choiseCard) {
@@ -49,31 +44,7 @@ const BoardPage = () => {
         card: choiseCard,
         board,
       };
-
-      if (choiseCard.player === 1) {
-        setPlayer1((prevState) =>
-          prevState.filter((item) => item.id !== choiseCard.id)
-        );
-      }
-      if (choiseCard.player === 2) {
-        setPlayer2((prevState) =>
-          prevState.filter((item) => item.id !== choiseCard.id)
-        );
-      }
-
-      fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          setBoard(result.data);
-          setChoiseCard(null);
-          setSteps((prevState) => prevState + 1);
-        });
+      dispatch(getPlayersTurnAsync(params));
     }
   };
 
@@ -85,68 +56,55 @@ const BoardPage = () => {
 
   useEffect(() => {
     if (steps === 9) {
-      const [count1, count2] = counterWin(board, player1, player2);
+      const [count1, count2] = counterWin(board, player1Cards, player2Cards);
       alert(getMessage(count1, count2));
       navigate('/game/finish');
     }
-  }, [steps, board, player1, player2, navigate]);
-
-  const fetchData = async () => {
-    const boardResponse = await fetch(
-      'https://reactmarathon-api.netlify.app/api/board'
-    );
-    const boardRequest = await boardResponse.json();
-    setBoard(boardRequest.data);
-
-    const player2Response = await fetch(
-      'https://reactmarathon-api.netlify.app/api/create-player'
-    );
-    const player2Request = await player2Response.json();
-    setPokemons2(player2Request.data);
-    setPlayer2(() =>
-      player2Request.data.map((item) => ({
-        ...item,
-        possession: 'red',
-      }))
-    );
-  };
+  }, [steps, board, player1Cards, player2Cards, navigate]);
 
   useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line
-  }, []);
+    dispatch(getPlayer2CardsAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBoardAsync());
+  }, [dispatch]);
 
   return (
     <div className={s.root}>
       <div className={s.playerOne}>
-        <PlayerBoard
-          player={1}
-          cards={player1}
-          onClickCard={(card) => setChoiseCard(card)}
-        />
+        {player1Cards ? (
+          <PlayerBoard player={1} cards={player1Cards} />
+        ) : (
+          <p>Player1 Loading...</p>
+        )}
       </div>
       <div className={s.board}>
-        {board.map((item) => (
-          <div
-            role="button"
-            tabIndex={0}
-            key={item.position}
-            className={s.boardPlate}
-            onClick={() => !item.card && handleClickBoardPlate(item.position)}
-            onKeyPress={() =>
-              !item.card && handleClickBoardPlate(item.position)
-            }
-          >
-            {item.card && <PokemonCard {...item.card} minimize isActive />}
-          </div>
-        ))}
+        {board ? (
+          board.map((item) => (
+            <div
+              role="button"
+              tabIndex={0}
+              key={item.position}
+              className={s.boardPlate}
+              onClick={() => !item.card && handleClickBoardPlate(item.position)}
+              onKeyPress={() =>
+                !item.card && handleClickBoardPlate(item.position)
+              }
+            >
+              {item.card && <PokemonCard {...item.card} minimize isActive />}
+            </div>
+          ))
+        ) : (
+          <p>board</p>
+        )}
       </div>
       <div className={s.playerTwo}>
-        <PlayerBoard
-          player={2}
-          cards={player2}
-          onClickCard={(card) => setChoiseCard(card)}
-        />
+        {player2Cards ? (
+          <PlayerBoard player={2} cards={player2Cards} />
+        ) : (
+          <p>Player2 Loading...</p>
+        )}
       </div>
     </div>
   );
