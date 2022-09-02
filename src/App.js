@@ -18,16 +18,16 @@ const App = () => (
       <Route path="/" element={<AppLayout />}>
         <Route index element={<HomePage />} />
         <Route path="contact" element={<ContactPage />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="game" element={<GamePage />}>
-            <Route index element={<StartPage />} />
-            <Route path="start" element={<StartPage />} />
-            <Route path="board" element={<BoardPage />} />
-            <Route path="finish" element={<FinishPage />} />
-          </Route>
-          <Route path="about" element={<AboutPage />} />
-        </Route>
+        <Route path="about" element={<AboutPage />} />
         <Route path="*" element={<NotFoundPage />} />
+      </Route>
+      <Route element={<PrivateRoute />}>
+        <Route path="game" element={<GamePage />}>
+          <Route index element={<StartPage />} />
+          <Route path="start" element={<StartPage />} />
+          <Route path="board" element={<BoardPage />} />
+          <Route path="finish" element={<FinishPage />} />
+        </Route>
       </Route>
     </Routes>
     <NotificationContainer />
