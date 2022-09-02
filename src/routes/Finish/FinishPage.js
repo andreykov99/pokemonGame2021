@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import PokemonCard from '../../components/PokemonCard';
@@ -8,29 +9,29 @@ import s from './style.module.css';
 const FinishPage = () => {
   // todo: dummy function will be deleted
   const addPokemon = () => {};
-  const pokemons = [];
-  const pokemons2 = [];
+  const player1Cards = useSelector((state) => state.game.player1Cards);
+  const player2Cards = useSelector((state) => state.game.player2Cards);
 
   const navigate = useNavigate();
   const [isSelected, setSelected] = useState(null);
 
-  if (Object.keys(pokemons).length === 0) {
-    navigate('/game', { replace: true });
-  }
+  // if (Object.keys(player1Cards).length === 0) {
+  //   navigate('/game', { replace: true });
+  // }
 
   const handleCardClick = (id) => {
     setSelected(id);
   };
 
   const handleEndButton = () => {
-    const pokemon = pokemons2.filter((item) => item.id === isSelected)[0];
+    const pokemon = player2Cards.filter((item) => item.id === isSelected)[0];
     addPokemon(pokemon, () => navigate('/game'));
   };
 
   return (
     <div className={s.wrap}>
       <div className={s.playerOne}>
-        {Object.values(pokemons).map((item) => (
+        {Object.values(player1Cards).map((item) => (
           <PokemonCard
             className={s.card}
             key={item.id}
@@ -47,7 +48,7 @@ const FinishPage = () => {
         END GAME
       </button>
       <div className={s.playerTwo}>
-        {pokemons2.map((item) => (
+        {player2Cards.map((item) => (
           <PokemonCard
             className={s.card}
             key={item.id}

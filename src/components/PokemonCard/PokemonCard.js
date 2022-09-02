@@ -66,7 +66,7 @@ const PokemonCard = ({
 
 PokemonCard.propTypes = {
   className: PropTypes.string,
-  minimize: PropTypes.string,
+  minimize: PropTypes.bool,
   name: PropTypes.string,
   type: PropTypes.string,
   values: PropTypes.object,
