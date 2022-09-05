@@ -86,15 +86,27 @@ export const gameSlice = createSlice({
     [getPlayersTurnAsync.fulfilled]: (state, action) => {
       state.status = 'resolved';
       if (state.choiseCard.player === 1) {
-        state.player1Cards = state.player1Cards.filter(
-          (item) => item.id !== state.choiseCard.id
+        const index = state.player1Cards.findIndex(
+          (pokemon) => pokemon.key === state.choiseCard.key
         );
-      }
-      if (state.choiseCard.player === 2) {
-        state.player2Cards = state.player2Cards.filter(
-          (item) => item.id !== state.choiseCard.id
+        state.player1Cards[index].isPlayed = true;
+      } else {
+        const index = state.player2Cards.findIndex(
+          (pokemon) => pokemon.key === state.choiseCard.key
         );
+        state.player2Cards[index].isPlayed = true;
       }
+
+      // if (state.choiseCard.player === 1) {
+      //   state.player1Cards = state.player1Cards.filter(
+      //     (item) => item.id !== state.choiseCard.id
+      //   );
+      // }
+      // if (state.choiseCard.player === 2) {
+      //   state.player2Cards = state.player2Cards.filter(
+      //     (item) => item.id !== state.choiseCard.id
+      //   );
+      // }
       state.board = action.payload;
       state.steps += 1;
       state.choiseCard = null;

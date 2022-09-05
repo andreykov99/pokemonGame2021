@@ -8,10 +8,11 @@ import s from './style.module.css';
 
 const PlayerBoard = ({ player, cards }) => {
   const dispatch = useDispatch();
+  const playerCards = cards.filter((pokemon) => !pokemon.isPlayed);
   const [isSelected, setSelected] = useState([]);
-  const handleCardClick = (id) => {
-    setSelected(id);
-    const result = cards.filter((item) => item.id === id)[0];
+  const handleCardClick = (key) => {
+    setSelected(key);
+    const result = cards.filter((item) => item.key === key)[0];
     dispatch(
       setChoiseCard({
         player,
@@ -22,9 +23,9 @@ const PlayerBoard = ({ player, cards }) => {
 
   return (
     <>
-      {cards.map((item) => (
+      {playerCards.map((item) => (
         <PokemonCard
-          className={cn(s.card, { [s.selected]: isSelected === item.id })}
+          className={cn(s.card, { [s.selected]: isSelected === item.key })}
           minimize
           key={item.key}
           id={item.id}
@@ -34,7 +35,7 @@ const PlayerBoard = ({ player, cards }) => {
           img={item.img}
           possession={item.possession}
           isActive
-          handleCardClick={handleCardClick}
+          handleCardClick={() => handleCardClick(item.key)}
         />
       ))}
     </>
